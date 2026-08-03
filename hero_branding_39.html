@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEOON</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@500;700;800&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body{ width:100%; background:#000; overscroll-behavior:none; }
+
+
+#scroll-container{ position:relative; width:100%; }
+.scroll-section{
+  position:relative; width:100%; min-height:100vh;
+}
+.scroll-section.active{ pointer-events:auto; }
+.scroll-section[data-scrollable]{ overflow:visible; }
+
+
+#global-header{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  height:0;
+  font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", "Noto Sans JP", sans-serif;
+  pointer-events:none; color:#fff;
+  transition:color .45s ease, opacity .45s ease;
+}
+#global-header a{ color:inherit; text-decoration:none; pointer-events:auto; }
+#global-header .gh-left{
+  position:absolute; left:82.1719px; top:42.0336px; width:69.7314px;
+  display:flex; flex-direction:column; text-align:right;
+  font-weight:400; font-size:12px; line-height:20px; letter-spacing:0.025em;
+}
+#global-header .gh-right{
+  position:absolute; left:751.9023px; top:42.0337px; width:89.7832px;
+  display:flex; align-items:center; gap:8px; white-space:nowrap;
+  font-weight:400; font-size:12px; line-height:15px; letter-spacing:0.025em;
+  transition:opacity .3s ease;
+}
+#global-header .gh-functions{
+  position:absolute; left:1101.9024px; top:42.0337px; width:67.8232px;
+  white-space:nowrap;
+  font-weight:400; font-size:12px; line-height:15px; letter-spacing:0.025em;
+  transition:opacity .3s ease;
+}
+#global-header .gh-dot{ width:4px; height:4px; border-radius:50%; background:currentColor; }
+#global-header.onlight{ color:#1a1c1e; text-shadow:0 1px 10px rgba(255,255,255,.5); }
+#global-header.ondark{ color:#fff; text-shadow:0 2px 14px rgba(0,0,0,.5); }
+@media (max-width:720px){
+  #global-header .gh-left{ left:20px; top:60px; }
+  #global-header .gh-left, #global-header .gh-right, #global-header .gh-functions{ font-size:10px; line-height:16px; }
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+#sec-hero{ background:#0a0a0a; overflow:hidden; }
+#sec-hero .hero{ position:relative; width:100%; height:100vh; height:100dvh; overflow:hidden; }
+
+#sec-hero #heroVideo{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; z-index:0;
+}
+#sec-hero .base-fade{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:none;
+}
+#sec-hero .logo{
+  position:absolute; left:5%; bottom:1%; z-index:3;
+  font-family:"Poppins", sans-serif; font-weight:800;
+  font-size:217px;
+  letter-spacing:-0.02em; color:#ffffff; line-height:1;
+  user-select:none;
+}
+
+
+/* =========================================================
+   BRANDING
+========================================================= */
+#sec-branding{
+  --cream:#f7f4ee; --ink:#1c1a1e; --ink-soft:#4a444c;
+  --line:rgba(20,20,30,.14);
+  background:#dce7f3; color:var(--ink);
+  font-family:"Noto Sans JP", sans-serif;
+  overflow:hidden;
+}
+#sec-branding #brandingCanvasWrap{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+#sec-branding #brandingCanvasWrap canvas{ display:block; width:100%; height:100%; }
+#sec-branding .topbar{
+  position:absolute; top:0; left:0; right:0; height:5px; z-index:5;
+  background:linear-gradient(90deg, #4a6da8 0%, #7f97bb 45%, #b9c4d4 75%, rgba(185,196,212,.2) 100%);
+  pointer-events:none;
+}
+#sec-branding .nav{
+  position:relative; z-index:10;
+  display:flex; justify-content:space-between; align-items:flex-start;
+  padding:34px 60px 0 60px;
+  pointer-events:none;
+  font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif;
+}
+#sec-branding .nav-left{
+  display:flex; flex-direction:column; gap:14px;
+  font-size:12px; letter-spacing:.14em; font-weight:500; text-align:center;
+}
+#sec-branding .nav-left a{ color:inherit; text-decoration:none; }
+#sec-branding .nav-right{
+  display:flex; gap:70px; font-size:12px; letter-spacing:.14em; font-weight:500; padding-top:2px;
+  margin-left:auto;
+}
+#sec-branding .nav-right span{ white-space:nowrap; }
+
+#sec-branding .content{
+  position:relative; z-index:6; min-height:100vh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:0;
+  pointer-events:none;
+}
+#sec-branding .design-frame{
+  position:absolute; top:0; left:0; width:1440px; height:900px;
+  transform-origin:top left; pointer-events:none;
+}
+#sec-branding .eyebrow{
+  position:absolute; left:720px; top:280px; width:680px; height:650px;
+  text-align:center; white-space:nowrap;
+  font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif;
+  font-size:35px; line-height:30.0836px; letter-spacing:0.075em;
+}
+#sec-branding .eyebrow .bold{
+  font-weight:700; margin-right:14px;
+}
+#sec-branding .eyebrow .light{
+  font-weight:200; font-style:italic; color:var(--ink-soft);
+}
+#sec-branding .headline{
+  position:absolute; left:50%; transform:translateX(-50%); top:309.9647px; width:auto; height:420px;
+  font-weight:400; font-size:82px; line-height:150px;
+  letter-spacing:0; text-align:center; white-space:nowrap;
+}
+#sec-branding .headline .bold{ font-weight:900; }
+#sec-branding .copy{
+  position:absolute; left:574.5702px; top:545.4302px; width:740.2881px; height:280px;
+  text-align:right; color:var(--ink-soft);
+  font-family:"Noto Sans JP", sans-serif; font-weight:300;
+  font-size:20px; line-height:normal; letter-spacing:0.025em;
+}
+#sec-branding .copy p{ margin-bottom:14px; }
+#sec-branding .watermark{
+  position:absolute; left:-2%; bottom:-8%; z-index:1;
+  font-family:"Poppins", sans-serif; font-weight:800;
+  font-size:min(34vw, 420px); letter-spacing:-.02em;
+  color:rgba(20,15,20,.06); user-select:none; pointer-events:none;
+  line-height:1;
+}
+@media (max-width:820px){
+  #sec-branding .nav{ padding:24px 24px 0; }
+  #sec-branding .nav-right{ gap:26px; font-size:10px; }
+  #sec-branding .content{ padding:0 24px; }
+  #sec-branding .eyebrow .bold, #sec-branding .eyebrow .light{ font-size:22px; }
+  #sec-branding .copy{ max-width:100%; }
+  #sec-branding .headline{ font-size:clamp(30px, 8vw, 84px); line-height:1.15; }
+}
+
+/* =========================================================
+   YALO
+========================================================= */
+#sec-yalo{ background:#7591cb; color:#1a1c1e; overflow:hidden; font-family:"Noto Sans JP", sans-serif; }
+#sec-yalo .yalo-bg{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+#sec-yalo #yaloBgPanel{
+  position:absolute; right:24px; top:100px; z-index:20; pointer-events:auto;
+  background:rgba(255,255,255,.92); backdrop-filter:blur(8px);
+  border:1px solid rgba(0,0,0,.08); border-radius:10px;
+  padding:12px 16px; font-family:"Poppins", sans-serif; font-size:11px; color:#15171a;
+  display:flex; flex-direction:column; gap:6px; min-width:220px;
+  max-height:calc(100vh - 130px); overflow-y:auto;
+}
+#sec-yalo #yaloBgPanel .ybp-title{ font-weight:700; font-size:12px; margin-bottom:2px; }
+#sec-yalo #yaloBgPanel .ybp-sub{ font-weight:700; font-size:11px; margin:8px 0 2px; color:#4a5461; border-top:1px solid rgba(0,0,0,.08); padding-top:6px; }
+#sec-yalo #yaloBgPanel label{ display:flex; align-items:center; gap:8px; }
+#sec-yalo #yaloBgPanel span{ width:32px; flex:none; font-variant-numeric:tabular-nums; }
+#sec-yalo #yaloBgPanel input[type=range]{ flex:1; }
+#sec-yalo #yaloBgPanel input[type=color]{ flex:1; padding:0; height:22px; border:none; background:none; }
+#sec-yalo .yalo-bg canvas{ display:block; width:100%; height:100%; }
+
+#sec-yalo .content{
+  position:relative; z-index:2; min-height:100vh;
+  padding:16vh 6vw 0 6vw;
+  pointer-events:none;
+}
+#sec-yalo .eyebrow{
+  position:absolute; left:360.5208px; top:196.1839px; width:223.4521px; height:34.3804px;
+  font-family:"Noto Sans JP", sans-serif; font-weight:500;
+  font-size:18px; line-height:45px; letter-spacing:0.3em; color:#3a3f45;
+  white-space:nowrap;
+}
+#sec-yalo .design-frame{
+  position:absolute; top:0; left:0; width:1440px; height:900px;
+  transform-origin:top left; pointer-events:none;
+}
+#sec-yalo .word{
+  position:absolute; left:360.2493px; top:287.787px; width:719.5005px; height:287.4985px;
+  font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif;
+  font-weight:700; letter-spacing:0.075em;
+  font-size:250px; line-height:91.5972px; color:#0d0e10;
+}
+#sec-yalo .keywords{ position:absolute; top:0; left:0; width:100%; height:100%; }
+#sec-yalo .kw{ position:absolute; top:460.47px; text-align:left; }
+#sec-yalo .kw .jp{
+  display:block; font-family:"Noto Sans JP", sans-serif; font-weight:100;
+  font-size:40.0644px; line-height:44.6756px; color:#23262b; letter-spacing:0.1em;
+}
+#sec-yalo .kw .en{ display:block; font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:500; font-size:18.03px; letter-spacing:.05em; color:#8a93a0; margin-top:4px; }
+#sec-yalo .kw.dim .jp{ color:#9aa2ab; }
+#sec-yalo .kw.dim .en{ color:#b7bfc7; }
+#sec-yalo .kw.dim2 .jp{ color:#b6bcc3; }
+#sec-yalo .kw.dim2 .en{ color:#c8cfd6; }
+
+#sec-yalo .lead{
+  position:absolute; left:401.9359px; top:562.8748px; width:636.1274px; height:89.9001px;
+  font-family:"Noto Sans JP", sans-serif; font-weight:400;
+  font-size:25px; line-height:42px; letter-spacing:0.1em; color:#2a2d31;
+  text-align:center; white-space:nowrap;
+}
+
+#sec-yalo .cards{ position:absolute; left:246px; top:688px; display:flex; gap:30px; }
+#sec-yalo .card{
+  width:284px; min-height:115px; height:auto; flex:none; display:flex; gap:16px; align-items:flex-start;
+  background:rgba(140,160,182,.28); border:1px solid rgba(255,255,255,.35);
+  border-radius:10px; padding:22px 20px; backdrop-filter:blur(6px);
+  box-sizing:border-box;
+}
+#sec-yalo .card .icon{ flex:none; width:44px; height:44px; color:#3a5068; }
+#sec-yalo .card .icon svg{ width:100%; height:100%; }
+#sec-yalo .card p{ font-family:"Noto Sans JP", sans-serif; font-weight:400; font-size:15px; line-height:1.75; letter-spacing:-0.02em; color:#20252b; }
+
+#sec-yalo .rail{
+  position:absolute; right:4vw; top:50%; transform:translateY(-30%);
+  z-index:2; display:flex; flex-direction:column; gap:26px;
+  pointer-events:none;
+}
+#sec-yalo .rail-item{
+  display:flex; align-items:center; gap:10px;
+  font-family:"Poppins", sans-serif; font-size:11px; letter-spacing:.16em; color:#4a5461;
+}
+#sec-yalo .rail-item::before{ content:''; width:5px; height:5px; border-radius:50%; background:#4a5461; }
+
+@media (max-width:900px){
+  #sec-yalo .content{ padding:14vh 6vw 0; }
+  #sec-yalo .word{ position:static; width:auto; height:auto; font-size:clamp(70px, 20vw, 165px); line-height:.9; }
+  #sec-yalo .cards{ position:static; flex-direction:column; width:auto; }
+  #sec-yalo .card{ width:auto; height:auto; }
+  #sec-yalo .keywords{ position:static; display:flex; gap:24px; flex-wrap:wrap; margin:6vh 0 34px; }
+  #sec-yalo .kw{ position:static; text-align:center; }
+  #sec-yalo .rail{ display:none; }
+}
+
+/* =========================================================
+   FUNCTIONS
+========================================================= */
+#sec-functions{
+  background:linear-gradient(160deg, #fbfcfc 0%, #f5f7f8 55%, #eef1f3 100%);
+  color:#15171a; font-family:"Noto Sans JP", sans-serif;
+}
+#sec-functions .func-hero{ position:relative; z-index:1; padding:15vh 6vw 7vh; text-align:center; }
+#sec-functions .func-title{
+  display:flex; align-items:baseline; justify-content:center; gap:18px; flex-wrap:wrap;
+}
+#sec-functions .func-title h1{
+  font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; letter-spacing:0;
+  font-size:90px; color:#0d0e10; line-height:1;
+}
+#sec-functions .func-title .jp-tag{ font-size:30px; font-weight:700; color:#0d0e10; }
+#sec-functions .func-lead{ margin-top:24px; font-family:"Noto Sans JP", sans-serif; font-size:28px; font-weight:500; line-height:1.7; color:#1a1c1e; }
+#sec-functions .func-sub{ margin-top:14px; font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:400; font-size:20px; line-height:30px; letter-spacing:0.05em; color:#8b929a; }
+
+#sec-functions .func-group{ padding:5vh 6vw; }
+#sec-functions .func-group-title{
+  display:flex; align-items:baseline; justify-content:center; gap:12px; margin-bottom:34px;
+}
+#sec-functions .func-group-title .en{ font-family:"Poppins", sans-serif; font-weight:800; font-size:clamp(17px,2vw,23px); }
+#sec-functions .func-group-title .jp{ font-size:13px; font-weight:600; color:#6c7178; }
+
+#sec-functions .func-accordion{ position:relative; z-index:1; max-width:1000px; margin:2vh auto 0; }
+#sec-functions .func-acc-item{ position:relative; border-top:1px solid #dadde1; }
+#sec-functions .func-acc-item:last-child{ border-bottom:1px solid #dadde1; }
+#sec-functions .func-acc-head{
+  position:sticky; top:0; z-index:3;
+  display:flex; align-items:baseline; gap:16px;
+  padding:22px 0; background:#f5f7f8;
+}
+#sec-functions .func-acc-head .idx{ font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:700; font-size:13px; color:#9aa0a7; }
+#sec-functions .func-acc-head .en{ font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; font-size:32px; letter-spacing:.05em; color:#0d0e10; }
+#sec-functions .func-acc-head .jp{ font-size:14px; font-weight:600; color:#8b929a; }
+#sec-functions .func-acc-body-inner{
+  padding:2vh 0 6vh;
+  opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;
+}
+#sec-functions .func-acc-item.inview > .func-acc-body > .func-acc-body-inner{ opacity:1; transform:translateY(0); }
+
+#sec-functions .func-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+}
+#sec-functions .func-card{
+  background:#fff; border:1px solid #e5e8ec; border-radius:12px;
+  padding:38px 22px 30px; text-align:center;
+}
+#sec-functions .func-card .icon{ width:52px; height:52px; margin:0 auto 22px; color:#1c2024; }
+#sec-functions .func-card .icon svg{ width:100%; height:100%; }
+#sec-functions .func-card h3{ font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; font-size:30px; line-height:1.25; }
+#sec-functions .func-card .jp-sub{ font-family:"Noto Sans JP", sans-serif; font-weight:200; font-size:18px; color:#8b929a; margin:6px 0 16px; }
+#sec-functions .func-card p{ font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:15px; line-height:1.85; color:#3d4046; }
+
+#sec-functions .func-divider{ height:1px; margin:0 6vw; background:linear-gradient(90deg, transparent, #d6dadf 40%, #d6dadf 60%, transparent); }
+
+@media (max-width:820px){
+  #sec-functions .func-grid{ grid-template-columns:1fr 1fr; gap:14px; }
+  #sec-functions .func-card{ padding:26px 16px 22px; }
+  #sec-functions .func-acc-head{ gap:14px; padding:22px 4px; }
+  #sec-functions .func-acc-head .idx{ flex:0 0 20px; }
+}
+@media (max-width:520px){
+  #sec-functions .func-grid{ grid-template-columns:1fr; }
+}
+
+/* =========================================================
+   YALO DIAGNOSIS (yalofree) — 自動カルーセル
+========================================================= */
+#sec-yalofree{ background:#0a0a0a; color:#121417; font-family:"Noto Sans JP", sans-serif; overflow:hidden; }
+#sec-yalofree #yalofreeVideo{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; z-index:0;
+}
+#sec-yalofree .yf-wrap{
+  position:relative; z-index:1;
+  min-height:100vh; display:flex; align-items:center; gap:5vw; padding:0 6vw;
+}
+#sec-yalofree .yf-left{ flex:0 0 300px; position:relative; z-index:1; }
+#sec-yalofree .yf-title-backdrop{
+  position:absolute; top:0; left:0; height:100%;
+  width:400px; /* .yf-left's 300px column + 100px, per the original spec —
+                  not the full screen width, which would cover the carousel too */
+  background:rgba(255,255,255,0.82);
+  pointer-events:none;
+}
+#sec-yalofree .yf-word{
+  font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; font-size:70px;
+  line-height:1; letter-spacing:0.04em; color:#0d0e10;
+}
+#sec-yalofree .yf-jp{ font-family:"Noto Sans JP", sans-serif; font-size:60px; font-weight:700; letter-spacing:0.05em; margin-top:4px; }
+#sec-yalofree .yf-lead{ margin-top:26px; font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:20px; letter-spacing:0.03em; line-height:1.9; color:#3a3d42; max-width:260px; }
+#sec-yalofree .yf-note{ margin-top:22px; font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:15px; letter-spacing:-0.04em; color:#9a9fa6; }
+#sec-yalofree .yf-entry{
+  margin-top:20px; display:inline-flex; align-items:center; gap:14px;
+  background:#12151a; color:#f4f4f2; border-radius:999px; padding:14px 10px 14px 26px;
+  font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-size:24px; font-weight:300; letter-spacing:.15em;
+  text-decoration:none; width:fit-content;
+}
+#sec-yalofree .yf-entry .arrow{
+  width:26px; height:26px; border-radius:50%; background:#3a7bd5;
+  display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px;
+}
+
+#sec-yalofree .yf-carousel{ flex:1; min-width:0; position:relative; overflow:hidden; }
+#sec-yalofree .yf-track{ display:flex; gap:22px; will-change:transform; transition:transform .7s cubic-bezier(.4,0,.2,1); }
+#sec-yalofree .yf-card{
+  flex:0 0 300px; background:#fff; border:1px solid #ececef; border-radius:14px;
+  padding:32px 26px; box-shadow:0 14px 34px rgba(20,24,30,.06);
+}
+#sec-yalofree .yf-card .icon{ width:44px; height:44px; margin-bottom:22px; color:#1c2024; }
+#sec-yalofree .yf-card .icon svg{ width:100%; height:100%; }
+#sec-yalofree .yf-card h3{ font-family:"Noto Sans JP", sans-serif; font-size:30px; font-weight:700; letter-spacing:0.03em; margin-bottom:16px; position:relative; padding-bottom:12px; }
+#sec-yalofree .yf-card h3::after{ content:''; position:absolute; left:0; bottom:0; width:26px; height:2px; background:#1c2024; }
+#sec-yalofree .yf-card ol{ list-style:none; }
+#sec-yalofree .yf-card li{ margin-bottom:16px; }
+#sec-yalofree .yf-card li:last-child{ margin-bottom:0; }
+#sec-yalofree .yf-card .li-title{ display:flex; gap:8px; font-family:"Noto Sans JP", sans-serif; font-size:14px; font-weight:700; margin-bottom:4px; }
+#sec-yalofree .yf-card .li-title .num{ color:#3a7bd5; font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:300; }
+#sec-yalofree .yf-card .li-desc{ font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:13px; line-height:1.7; color:#5a5f66; padding-left:22px; }
+
+#sec-yalofree .yf-card.image-card{ padding:0; overflow:hidden; background:#f4f5f7; }
+#sec-yalofree .mock-grfo{ padding:22px; }
+#sec-yalofree .mock-grfo .cap{ font-size:10px; letter-spacing:.1em; color:#9aa; margin-bottom:6px; }
+#sec-yalofree .mock-grfo .brand{ font-family:"Poppins",sans-serif; font-weight:800; font-size:26px; margin-bottom:14px; }
+#sec-yalofree .mock-grfo .badges{ display:flex; gap:6px; margin-bottom:14px; }
+#sec-yalofree .mock-grfo .badges span{ width:34px; height:34px; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700; font-family:"Poppins",sans-serif; }
+#sec-yalofree .mock-grfo .b1{ background:#e0574a; } #sec-yalofree .mock-grfo .b2{ background:#3a7bd5; }
+#sec-yalofree .mock-grfo .b3{ background:#3aa168; } #sec-yalofree .mock-grfo .b4{ background:#7a5ad1; }
+#sec-yalofree .mock-grfo .bars{ display:flex; gap:5px; margin-bottom:16px; }
+#sec-yalofree .mock-grfo .bars span{ flex:1; height:5px; background:#dfe2e6; border-radius:3px; }
+#sec-yalofree .mock-diamond{ width:110px; height:110px; margin:10px auto 0; border:1px solid #c7cbd1; transform:rotate(45deg); }
+
+#sec-yalofree .mock-report{ padding:24px; }
+#sec-yalofree .mock-report .rline{ height:7px; background:#e3e5e8; border-radius:3px; margin-bottom:10px; }
+#sec-yalofree .mock-report .rline.w60{ width:60%; }
+#sec-yalofree .mock-report .rline.w80{ width:80%; }
+#sec-yalofree .mock-report .rline.w40{ width:40%; }
+#sec-yalofree .mock-report .rhead{ height:11px; background:#b9bec5; border-radius:3px; width:50%; margin:18px 0 12px; }
+#sec-yalofree .mock-report .rhead:first-child{ margin-top:0; }
+
+#sec-yalofree .yf-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+  width:38px; height:38px; border-radius:50%; background:#fff; border:1px solid #e3e5e8;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; color:#1c2024;
+  box-shadow:0 6px 16px rgba(20,24,30,.08);
+}
+#sec-yalofree .yf-arrow.prev{ left:6px; }
+#sec-yalofree .yf-arrow.next{ right:6px; }
+#sec-yalofree .yf-dots{ position:absolute; left:50%; bottom:-2px; transform:translateX(-50%); display:flex; gap:7px; }
+#sec-yalofree .yf-dots span{ width:6px; height:6px; border-radius:50%; background:#d7dade; transition:background .3s,width .3s; }
+#sec-yalofree .yf-dots span.active{ background:#1c2024; width:16px; border-radius:3px; }
+
+@media (max-width:900px){
+  #sec-yalofree .yf-wrap{ flex-direction:column; align-items:flex-start; padding:10vh 6vw 4vh; gap:4vh; }
+  #sec-yalofree .yf-left{ flex:none; }
+  #sec-yalofree .yf-carousel{ width:100%; }
+}
+
+/* =========================================================
+   PRICING
+========================================================= */
+#sec-pricing{
+  background-image:
+    radial-gradient(140% 150% at 6% 94%, #fdf1ea 0%, rgba(253,241,234,.6) 22%, rgba(253,241,234,.22) 42%, rgba(253,241,234,0) 68%),
+    linear-gradient(135deg, #e3a7ba 0%, #cdc5d2 32%, #6a93bd 62%, #3f5f8c 100%);
+  background-attachment: fixed, fixed;
+  color:#15171a; font-family:"Noto Sans JP", sans-serif;
+}
+#sec-pricing .price-hero{ position:relative; z-index:1; text-align:center; padding:14vh 6vw 5vh; }
+#sec-pricing .price-title{ display:flex; align-items:baseline; justify-content:center; gap:16px; }
+#sec-pricing .price-title .en{ font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; font-size:30px; }
+#sec-pricing .price-title .jp{ font-size:24px; font-weight:700; }
+#sec-pricing .price-sub{ margin-top:14px; font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:16px; color:#4a4f56; }
+
+#sec-pricing .price-table{
+  max-width:1180px; margin:0 auto; background:#fff; border-radius:16px;
+  box-shadow:0 20px 50px rgba(20,24,30,.06);
+  display:grid; grid-template-columns:repeat(4, 1fr);
+}
+#sec-pricing .price-col{ padding:36px 26px; border-left:1px solid #ececef; text-align:center; }
+#sec-pricing .price-col:first-child{ border-left:none; }
+#sec-pricing .price-col h3{ font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:700; font-size:16px; letter-spacing:.05em; padding-bottom:0; border-bottom:none; margin-bottom:8px; }
+#sec-pricing .price-col .tagline{ font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:12px; color:#7a7f86; margin-bottom:2px; }
+#sec-pricing .price-col .plan-name{ font-family:"Noto Sans JP", sans-serif; font-size:14px; font-weight:700; margin-bottom:10px; }
+#sec-pricing .price-col .price{ font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:300; font-size:35px; margin-bottom:14px; }
+#sec-pricing .price-col .price .unit{ font-size:13px; font-weight:600; color:#6a6f76; }
+#sec-pricing .price-col .std-label{ font-family:"Noto Sans JP", sans-serif; font-weight:500; font-size:16px; margin-bottom:10px; }
+#sec-pricing .price-col .std-label b{ font-weight:700; }
+#sec-pricing .price-col ul{ list-style:none; text-align:left; max-width:210px; margin:0 auto; }
+#sec-pricing .price-col ul li{ position:relative; padding-left:14px; font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:15px; line-height:2.1; color:#2c2f34; }
+#sec-pricing .price-col ul li::before{ content:'•'; position:absolute; left:0; color:#9aa0a7; }
+#sec-pricing .price-col .note{ font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:11px; color:#9aa0a7; margin-top:4px; }
+#sec-pricing .price-col .mid-divider{ height:1px; background:#e9ebee; margin:22px 0; }
+#sec-pricing .price-col .select-title{ font-family:"Noto Sans JP", sans-serif; font-weight:700; font-size:14px; margin-bottom:2px; }
+#sec-pricing .price-col .select-func{ font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:700; font-size:16px; margin-bottom:10px; }
+#sec-pricing .price-col .select-desc{ font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:13px; color:#7a7f86; margin-bottom:10px; }
+
+#sec-pricing .price-col.custom .puzzle{ width:100px; height:100px; margin:20px auto 22px; color:#1c2024; }
+#sec-pricing .price-col.custom .puzzle svg{ width:100%; height:100%; }
+#sec-pricing .price-col.custom p{ font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:15px; line-height:2; letter-spacing:-.04em; color:#3a3d42; }
+
+#sec-pricing .price-footnote{ max-width:1180px; margin:10px auto 0; font-family:"Noto Sans JP", sans-serif; font-weight:300; text-align:right; font-size:12px; letter-spacing:.07em; color:#8b929a; }
+
+#sec-pricing .ext-block{ max-width:1180px; margin:6vh auto 0; padding:0 6vw; }
+#sec-pricing .ext-title{ display:flex; align-items:baseline; gap:14px; margin-bottom:20px; }
+#sec-pricing .ext-title .en{ font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; font-size:32px; letter-spacing:.05em; }
+#sec-pricing .ext-title .jp{ font-size:14px; color:#6c7178; }
+#sec-pricing .ext-row{
+  background:#fff; border-radius:14px; box-shadow:0 14px 34px rgba(20,24,30,.05);
+  display:flex; flex-wrap:wrap; justify-content:space-between; padding:26px 30px; gap:16px;
+}
+#sec-pricing .ext-item{ display:flex; align-items:center; gap:10px; font-family:"Noto Sans JP", sans-serif; font-size:15px; font-weight:400; color:#20232a; }
+#sec-pricing .ext-item .icon{ width:26px; height:26px; color:#2a2f36; flex:none; }
+#sec-pricing .ext-item .icon svg{ width:100%; height:100%; }
+
+#sec-pricing .price-cta{ text-align:center; padding:7vh 6vw 8vh; }
+#sec-pricing .price-cta .cta-note{ font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:15px; color:#3a3d42; margin-bottom:20px; }
+#sec-pricing .price-cta .cta-btn{
+  display:inline-flex; align-items:center; gap:16px; background:#fff; border:1px solid #e4e6e9;
+  border-radius:999px; padding:18px 12px 18px 34px; font-family:"Noto Sans JP", sans-serif; font-size:25px; font-weight:500; letter-spacing:.13em; color:#15171a;
+  text-decoration:none; box-shadow:0 14px 30px rgba(20,24,30,.06);
+}
+#sec-pricing .price-cta .cta-btn .arrow{
+  width:34px; height:34px; border-radius:50%; background:#3a7bd5; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+}
+#sec-pricing .price-cta .terms-link{
+  display:block; margin-top:22px; font-family:"Noto Sans JP", sans-serif; font-size:15px; font-weight:600; letter-spacing:.15em; color:#20232a; text-decoration:none;
+}
+
+@media (max-width:900px){
+  #sec-pricing .price-table{ grid-template-columns:1fr 1fr; }
+  #sec-pricing .price-col{ border-left:none; border-top:1px solid #ececef; }
+  #sec-pricing .price-col:nth-child(1), #sec-pricing .price-col:nth-child(2){ border-top:none; }
+  #sec-pricing .ext-row{ justify-content:flex-start; }
+}
+@media (max-width:560px){
+  #sec-pricing .price-table{ grid-template-columns:1fr; }
+  #sec-pricing .price-col{ border-top:1px solid #ececef; }
+  #sec-pricing .price-col:first-child{ border-top:none; }
+}
+
+/* =========================================================
+   STEP + FAQ
+========================================================= */
+#sec-step{
+  background-image:
+    radial-gradient(140% 150% at 6% 94%, #fdf1ea 0%, rgba(253,241,234,.6) 22%, rgba(253,241,234,.22) 42%, rgba(253,241,234,0) 68%),
+    linear-gradient(135deg, #e3a7ba 0%, #cdc5d2 32%, #6a93bd 62%, #3f5f8c 100%);
+  background-attachment: fixed, fixed;
+  color:#15171a; font-family:"Noto Sans JP", sans-serif;
+  overflow:hidden;
+}
+#sec-step #stepGlassStage{ position:sticky; top:0; height:0; z-index:0; overflow:visible; pointer-events:none; }
+#sec-step #stepGlassStage .step-bg-color{
+  position:absolute; top:-10vh; left:-10vw; width:120vw; height:calc(100vh + 20vh);
+  --glowX:6%; --glowY:94%;
+  background:
+    radial-gradient(140% 150% at var(--glowX) var(--glowY), #fdf1ea 0%, rgba(253,241,234,.6) 22%, rgba(253,241,234,.22) 42%, rgba(253,241,234,0) 68%),
+    linear-gradient(135deg, #e3a7ba 0%, #cdc5d2 32%, #6a93bd 62%, #3f5f8c 100%);
+  filter:blur(60px);
+}
+#sec-step .step-hero{ position:relative; z-index:1; }
+#sec-step .step-list{ position:relative; z-index:1; }
+#sec-step .faq-block{ position:relative; z-index:1; }
+#sec-step .faq-note{ position:relative; z-index:1; }
+#sec-step .step-hero{ text-align:center; padding:12vh 6vw 5vh; }
+#sec-step .step-title{ display:flex; align-items:baseline; justify-content:center; gap:16px; }
+#sec-step .step-title .en{ font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; font-size:30px; letter-spacing:.05em; }
+#sec-step .step-title .jp{ font-size:24px; font-weight:700; }
+#sec-step .step-sub{ margin-top:12px; font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:16px; letter-spacing:.06em; color:#4a4f56; }
+
+#sec-step .step-list{ max-width:1100px; margin:0 auto; padding:0 6vw; }
+#sec-step .step-row{
+  display:flex; align-items:center; gap:0; background:#fff; border-radius:16px;
+  padding:24px 34px; box-shadow:0 12px 28px rgba(20,24,30,.05);
+}
+#sec-step .step-num{ font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:300; font-size:20px; color:#2c2f34; flex:0 0 34px; }
+#sec-step .step-divider{ width:1px; align-self:stretch; background:#e6e8eb; margin:0 26px; }
+#sec-step .step-en{ flex:0 0 110px; font-family:"ITC Avant Garde Gothic Pro", sans-serif; font-weight:400; font-size:18px; letter-spacing:.05em; color:#8b929a; text-align:center; }
+#sec-step .step-jp{ flex:0 0 220px; font-family:"Noto Sans JP", sans-serif; font-size:24px; font-weight:500; text-align:center; letter-spacing:.15em; }
+#sec-step .step-desc{ flex:1; font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:#2c2f34; }
+#sec-step .step-connector{ text-align:center; font-size:18px; color:#9aa0a7; padding:8px 0; }
+
+#sec-step .faq-block{
+  max-width:1100px; margin:7vh auto 0; background:#fff; border-radius:18px;
+  padding:8px 5vw 4vh; box-shadow:0 16px 40px rgba(20,24,30,.06);
+}
+#sec-step .faq-title{ display:flex; align-items:baseline; gap:14px; padding:34px 0 22px; }
+#sec-step .faq-title .en{ font-family:"ITC Avant Garde Gothic Pro", "Century Gothic", "Futura", sans-serif; font-weight:700; font-size:24px; letter-spacing:.04em; }
+#sec-step .faq-title .jp{ font-size:16px; font-weight:700; }
+#sec-step .faq-item{ border-top:1px solid #ececef; }
+#sec-step .faq-item:last-child{ border-bottom:1px solid #ececef; }
+#sec-step .faq-q{
+  display:flex; align-items:center; gap:14px; padding:20px 4px; cursor:pointer;
+  font-family:"Noto Sans JP", sans-serif; font-size:20px; font-weight:500; letter-spacing:.02em; color:#15171a;
+}
+#sec-step .faq-q .chev{ transition:transform .3s ease; color:#8b929a; font-size:14px; flex:none; }
+#sec-step .faq-item.open .faq-q .chev{ transform:rotate(180deg); }
+#sec-step .faq-a{
+  max-height:0; overflow:hidden; transition:max-height .35s ease, padding .35s ease;
+  font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:#4a4f56; padding:0 4px;
+}
+#sec-step .faq-a p{ margin-bottom:10px; }
+#sec-step .faq-a p:last-child{ margin-bottom:0; }
+#sec-step .faq-item.open .faq-a{ padding:0 4px 22px; }
+
+#sec-step .faq-note{ text-align:center; font-family:"Noto Sans JP", sans-serif; font-weight:300; font-size:15px; letter-spacing:.07em; color:#6c7178; padding:30px 0 6vh; }
+
+@media (max-width:820px){
+  #sec-step .step-row{ flex-wrap:wrap; gap:10px 0; padding:20px 22px; }
+  #sec-step .step-divider{ display:none; }
+  #sec-step .step-en, #sec-step .step-jp{ text-align:left; flex:none; }
+  #sec-step .step-desc{ flex:1 1 100%; }
+}
+
+/* =========================================================
+   MESSAGE (closing statement) — comp matched
+========================================================= */
+#sec-message{
+  background:linear-gradient(135deg,#f7e9df 0%,#f7f2ee 36%,#eef1f4 68%,#dfe7ed 100%);
+  color:#000; font-family:"Noto Sans JP",sans-serif; overflow:hidden;
+}
+#sec-message .msg-line{
+  position:absolute; top:-2%; left:20%; width:1px; height:64%;
+  background:rgba(30,35,40,.28); transform:rotate(45deg); transform-origin:top;
+}
+#sec-message .msg-line::after{
+  content:""; position:absolute; left:-520px; top:335px; width:1250px; height:1px;
+  background:rgba(255,255,255,.6); transform:rotate(-28deg); transform-origin:left;
+}
+#sec-message .msg-wrap{
+  position:relative; z-index:1; width:100%; min-height:100vh;
+}
+#sec-message .msg-text{
+  position:absolute; left:8.7%; top:33.7%; margin:0;
+  font-family:"Noto Sans JP",sans-serif; font-weight:600;
+  font-size:clamp(38px,4.79vw,69px); line-height:1.087;
+  letter-spacing:.02em; white-space:nowrap;
+}
+
+/* =========================================================
+   FOOTER — comp matched
+========================================================= */
+#sec-footer{ background:#fff; color:#000; font-family:"Noto Sans JP",sans-serif; overflow:hidden; }
+#sec-footer .footer-bg-color{ display:none; }
+#sec-footer .footer-wrap{ position:relative; width:100%; min-height:100vh; }
+#sec-footer .deco-line{ position:absolute; background:#111; height:1px; transform-origin:0 0; opacity:.8; }
+#sec-footer .deco-dot{ position:absolute; width:4px; height:4px; border-radius:50%; background:#000; }
+
+#sec-footer .f-contact{ position:absolute; top:8.4%; right:6.8%; text-align:right; }
+#sec-footer .f-contact .label,#sec-footer .f-policy .label{
+  font-family:"ITC Avant Garde Gothic Pro","Century Gothic","Futura",sans-serif;
+  font-size:11.25px; letter-spacing:.07em; font-weight:400; margin-bottom:10px;
+}
+#sec-footer .f-contact .addr{
+  font-family:"ITC Avant Garde Gothic Pro","Century Gothic","Futura",sans-serif;
+  font-size:11.25px; line-height:1.7; letter-spacing:.07em; color:#000;
+}
+#sec-footer .f-contact .insta{ margin-top:14px; display:flex; justify-content:flex-end; }
+#sec-footer .f-contact .insta svg{ width:22px; height:22px; }
+#sec-footer .f-policy{ position:absolute; top:21.9%; right:6.8%; text-align:right; }
+#sec-footer .f-policy a{
+  display:block; font-family:"ITC Avant Garde Gothic Pro","Century Gothic","Futura",sans-serif;
+  font-size:11.25px; line-height:30px; color:#000; text-decoration:none; margin:0; font-style:normal;
+}
+#sec-footer .f-talk{ position:absolute; left:12.8%; top:58.5%; }
+#sec-footer .f-talk .eyebrow{
+  font-family:"ITC Avant Garde Gothic Pro","Century Gothic","Futura",sans-serif;
+  font-weight:500; font-size:45.04px; line-height:1; margin-bottom:16px; font-style:normal;
+}
+#sec-footer .f-talk a{
+  display:flex; align-items:center; gap:14px; font-family:"Noto Sans JP",sans-serif;
+  font-size:43px; line-height:1; font-weight:500; color:#000; text-decoration:none;
+}
+#sec-footer .f-talk a span{ font-family:Arial,sans-serif; font-size:42px; transform:translateY(-2px); }
+#sec-footer .f-word{
+  position:absolute; left:12.7%; bottom:-4.5%;
+  font-family:"Poppins","ITC Avant Garde Gothic Pro",sans-serif; font-weight:800;
+  letter-spacing:-.045em; font-size:22.5vw; line-height:.76; color:#000; white-space:nowrap;
+}
+#sec-footer .f-copy{
+  position:absolute; left:6.6%; bottom:8.3%;
+  font-family:"ITC Avant Garde Gothic Pro","Century Gothic","Futura",sans-serif;
+  font-size:9.75px; letter-spacing:.05em; color:#000;
+}
+@media (max-width:820px){
+  #sec-message .msg-text{ left:6%; top:30%; font-size:clamp(26px,6vw,48px); white-space:normal; width:88%; }
+  #sec-footer .f-word{ font-size:29vw; left:7%; }
+  #sec-footer .f-contact,#sec-footer .f-policy{ right:5%; }
+  #sec-footer .f-talk{ left:7%; }
+  #sec-footer .f-talk .eyebrow{ font-size:34px; }
+  #sec-footer .f-talk a{ font-size:28px; }
+}
+
+/* GSAP text motion */
+.wo-char,.wo-word{display:inline-block;will-change:transform,opacity,filter}
+.wo-line-mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+#sec-hero .logo{perspective:900px}
+@media (prefers-reduced-motion:reduce){.wo-char,.wo-word{transform:none!important;opacity:1!important;filter:none!important}}
+
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+<header id="global-header" class="ondark">
+  <div class="gh-left">
+    <a href="#sec-hero">TOP</a>
+    <a href="#sec-branding">WEOON</a>
+    <a href="#sec-yalo">YALO</a>
+    <a href="#sec-functions">FUNCTIONS</a>
+    <a href="#sec-pricing">PLAN</a>
+    <a href="#sec-message">APPROACH</a>
+  </div>
+  <div class="gh-right">
+    <span>YALO / ENGINE</span>
+  </div>
+  <div class="gh-functions">
+    <span>FUNCTIONS</span>
+  </div>
+</header>
+
+<div id="scroll-container">
+
+  <section id="sec-hero" class="scroll-section active" data-section="hero" data-charge-title=".logo">
+    <div class="hero">
+      <video id="heroVideo" autoplay muted loop playsinline src="hero.mp4"></video>
+      <div class="base-fade"></div>
+      <div class="logo">WEOON</div>
+    </div>
+  </section>
+
+  <section id="sec-branding" class="scroll-section" data-section="branding" data-charge-title=".eyebrow, .headline" data-charge-sub=".copy">
+    <div id="brandingCanvasWrap"></div>
+    <div class="watermark">WEOON</div>
+    <div class="topbar"></div>
+    <div class="content">
+      <div class="design-frame">
+        <div class="eyebrow">
+          <span class="bold">Branding</span><span class="light">the structure of business</span>
+        </div>
+        <div class="headline">
+          <span class="bold">経営</span>を<span class="bold">構造</span>から<span class="bold">ブランディングする</span>
+        </div>
+        <div class="copy">
+          <p>私たちは、ブランドの価値や思想を起点とし、<br>商品、顧客、体験、収益を統合しながら、<br>データ解析に基づいた最適な経営構造を設計します。</p>
+          <p>戦略設計だけではなく、<br>実行・改善・運用までを一体化した事業体制を備え、<br>事業の進化につながる循環をクリエイトします。</p>
+          <p>クライアントと戦略的なパートナーシップを構築し、<br>ブランド価値と事業成長を持続的に拡張していきます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-yalo" class="scroll-section" data-section="yalo" data-charge-title=".word" data-charge-sub=".lead">
+    <div class="yalo-bg" id="yaloCanvasWrap"></div>
+
+    <div id="yaloBgPanel">
+      <div class="ybp-title">YALO背景 調整</div>
+      <label>境目の動く速さ <span id="ybSpeedVal">1.78</span><input type="range" id="ybSpeed" min="0" max="5" step="0.01" value="1.78"></label>
+      <label>混ざり方(blur) <span id="ybBlurVal">15</span><input type="range" id="ybBlur" min="0" max="60" step="1" value="15"></label>
+
+      <div class="ybp-sub">斜めの位置ごとの色(左上→右下)</div>
+      <label>①左上 <input type="color" id="ybColor0" value="#587bb3"></label>
+      <label>② <input type="color" id="ybColor1" value="#92a7d1"></label>
+      <label>③ <input type="color" id="ybColor2" value="#7f98c8"></label>
+      <label>④右下 <input type="color" id="ybColor3" value="#728ec2"></label>
+    </div>
+
+    <div class="content">
+      <div class="design-frame">
+        <div class="eyebrow">経営構造解析エンジン</div>
+        <div class="word">YALO</div>
+        <p class="lead">YALOの循環機能に接続することで、<br>ブランド価値と事業運用は継続的に進化していきます。</p>
+        <div class="cards">
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 73.83 44.17"><path d="M29.66,22.08c0-6.49,2.8-12.32,7.25-16.36-3.92-3.56-9.12-5.72-14.83-5.72C9.89,0,0,9.89,0,22.08s9.89,22.08,22.08,22.08c5.71,0,10.91-2.17,14.83-5.72-4.45-4.04-7.25-9.87-7.25-16.36Z" fill="currentColor"/><path d="M51.75,0c-5.71,0-10.91,2.17-14.83,5.72,4.45,4.04,7.25,9.87,7.25,16.36s-2.8,12.32-7.25,16.36c3.92,3.56,9.12,5.72,14.83,5.72,12.2,0,22.08-9.89,22.08-22.08S63.95,0,51.75,0Z" fill="currentColor"/></svg></div>
+            <p>ブランドが抱える固有の課題に対する分析</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 50.83 50.83"><path d="M25.42,0C11.38,0,0,11.38,0,25.42s11.38,25.42,25.42,25.42,25.42-11.38,25.42-25.42S39.45,0,25.42,0ZM2.55,25.42c0-6.7,5.43-12.13,12.13-12.13s12.13,5.43,12.13,12.13-5.43,12.13-12.13,12.13-12.13-5.43-12.13-12.13ZM28.7,47.45c-3.88,0-7.03-3.15-7.03-7.03s3.15-7.03,7.03-7.03,7.03,3.15,7.03,7.03-3.15,7.03-7.03,7.03Z" fill="currentColor"/></svg></div>
+            <p>ブランドの構造とクリエイティブ戦略の再設計</p>
+          </div>
+          <div class="card">
+            <div class="icon"><svg viewBox="0 0 46.55 46.16"><path d="M9.79.01C17.81.01,17.91,1.1,22.23,5.58c7.83,8.12,15.53,16.38,23.29,24.58.53.56.95,1.48.97,2.25.09,3.93,0,7.87.06,11.81.02,1.33-.46,1.88-1.82,1.87-4.63-.05-9.26,0-13.89-.07-.61,0-1.38-.33-1.8-.77C19.57,35.39,10.13,25.52.72,15.61c-.42-.44-.67-1.22-.68-1.85C-.02,9.77.03,5.77,0,1.78-.01.53.47-.02,1.74,0c2.32.04,4.63.01,8.05.01Z" fill="currentColor"/><path d="M24.11,46.16H1.07c-.59,0-1.07-.48-1.07-1.07v-23.04c0-.95,1.15-1.43,1.83-.76l23.04,23.04c.67.67.2,1.83-.76,1.83Z" fill="currentColor"/></svg></div>
+            <p>事業活動から生まれるデータを蓄積・解析し導かれる知見をブランド設計と事業戦略へ接続</p>
+          </div>
+        </div>
+        <div class="keywords">
+          <div class="kw" style="left:401.58px;"><span class="jp">解析</span><span class="en">ANALYSIS</span></div>
+          <div class="kw" style="left:581.87px;"><span class="jp">設計</span><span class="en">DESIGN</span></div>
+          <div class="kw dim" style="left:764.41px;"><span class="jp">戦略</span><span class="en">STRATEGY</span></div>
+          <div class="kw dim2" style="left:952.32px;"><span class="jp">創造</span><span class="en">CREATION</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rail">
+      <div class="rail-item">ENGINE</div>
+      <div class="rail-item">ANALYSIS</div>
+      <div class="rail-item">DESIGN</div>
+      <div class="rail-item">STRATEGY</div>
+      <div class="rail-item">CREATION</div>
+      <div class="rail-item">CYCLE</div>
+    </div>
+  </section>
+
+  <section id="sec-functions" class="scroll-section" data-section="functions" data-scrollable data-charge-title=".func-title" data-charge-sub=".func-lead">
+    <div class="func-hero">
+      <div class="func-title"><h1>FUNCTIONS</h1><span class="jp-tag">機能</span></div>
+      <p class="func-lead">すべての施策はYALOと接続することで、<br>ブランド構造として機能し、成果を最大化します。</p>
+      <p class="func-sub">The functions connected to YALO work as an integrated brand structure,<br>maximizing performance across the business.</p>
+    </div>
+
+    <div class="func-accordion">
+      <div class="func-acc-item" data-idx="01">
+        <div class="func-acc-head"><span class="idx">01</span><span class="en">STANDARD SERVICES</span><span class="jp">標準サービス</span></div>
+        <div class="func-acc-body">
+        <div class="func-acc-body-inner">
+        <div class="func-grid">
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 82.26 80.19"><path d="M73.1,41.81c9.75-15.32,12.22-30.32,4.94-37.6-7.17-7.17-21.83-4.87-36.91,4.51,5.68,3.54,11.42,8.08,16.84,13.5,6.3,6.3,11.41,13.02,15.13,19.59Z" fill="currentColor"/><path d="M9.16,41.81C1.16,55.9-.46,69.25,6.28,75.98c6.84,6.84,20.51,5.06,34.85-3.27-6.35-3.69-12.83-8.66-18.9-14.74-5.2-5.2-9.6-10.7-13.07-16.16Z" fill="currentColor"/><path d="M41.13,8.73C26.05-.66,11.38-2.96,4.21,4.21-3.07,11.49-.59,26.49,9.16,41.81c3.73-6.56,8.83-13.29,15.13-19.59,5.42-5.42,11.16-9.96,16.84-13.5Z" fill="currentColor"/><path d="M60.03,57.97c-6.08,6.08-12.56,11.05-18.9,14.74,14.34,8.34,28.01,10.11,34.85,3.27,6.73-6.73,5.12-20.08-2.88-34.17-3.47,5.46-7.86,10.95-13.07,16.16Z" fill="currentColor"/></svg></div>
+          <h3>YALO</h3><div class="jp-sub">経営構造解析</div>
+          <p>各施策や事業活動と接続し、継続的に循環・運用できる経営基盤を設計します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 85.33 83.05"><path d="M39.57,56.27V9.11H6.66c-3.66,0-6.66,3-6.66,6.66v60.62c0,3.66,3,6.66,6.66,6.66h60.62c3.66,0,6.66-3,6.66-6.66v-13.46h-27.71c-3.66,0-6.66-3-6.66-6.66Z" fill="currentColor"/><path d="M78.67,0h-32.44c-3.66,0-6.66,3-6.66,6.66v2.45h27.71c3.66,0,6.66,3,6.66,6.66v47.16h4.73c3.66,0,6.66-3,6.66-6.66V6.66c0-3.66-3-6.66-6.66-6.66Z" fill="currentColor"/></svg></div>
+          <h3>BUSINESS<br>SYSTEM</h3><div class="jp-sub">業務システム</div>
+          <p>事業運営に必要なシステムを導入し、定型業務や管理業務の効率化を推進します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 64.68 93.01"><path fill-rule="evenodd" fill="currentColor" d="M3,61 A29,29 0 1,0 61,61 A29,29 0 1,0 3,61 Z M-11.32,32 A44,44 0 1,0 76.68,32 A44,44 0 1,0 -11.32,32 Z"/><circle cx="32.68" cy="32" r="29" fill="currentColor"/></svg></div>
+          <h3>BRAND<br>IDENTITY</h3><div class="jp-sub">ブランドアイデンティティ</div>
+          <p>ブランドの価値や世界観を定義し、戦略や事業構造に適応した進化型のブランド基準を形成します。</p>
+        </div>
+        </div>
+        </div>
+        </div>
+
+      <div class="func-acc-item" data-idx="02">
+        <div class="func-acc-head"><span class="idx">02</span><span class="en">SELECTIVE SERVICES</span><span class="jp">選択サービス</span></div>
+        <div class="func-acc-body">
+        <div class="func-acc-body-inner">
+        <div class="func-grid">
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 70.79 69.48"><path d="M35.76,69.48H0V0h70.79v31.57h-35.03v37.91Z" fill="currentColor"/><path d="M70.79,69.47h-30.5v-5.49h25.03v-25.87h5.47v31.36Z" fill="currentColor"/></svg></div>
+          <h3>WEB<br>PRODUCT</h3><div class="jp-sub">Webデザイン</div>
+          <p>HP設計から導線構築・運用までを行い、成果につながるWeb環境を構築します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 95.73 29.39"><circle cx="14.7" cy="14.7" r="14.7" fill="currentColor"/><circle cx="47.86" cy="14.7" r="14.7" fill="currentColor"/><circle cx="81.03" cy="14.7" r="14.7" fill="currentColor"/></svg></div>
+          <h3>SNS<br>OPERATION</h3><div class="jp-sub">SNS運用</div>
+          <p>投稿設計からクリエイティブ制作、SNS運用までを行い、認知形成と顧客接点を拡大します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 70.28 69.76"><path d="M70.28,0v18.85c-27.84,2.27-45.65,26.85-47.07,50.91H0V0h70.28Z" fill="currentColor"/></svg></div>
+          <h3>APP<br>OPERATION</h3><div class="jp-sub">APP運用</div>
+          <p>最適な情報提供やユーザーコミュニケーションを実現するとともに、CRM基盤としても設計します。</p>
+        </div>
+        </div>
+        </div>
+        </div>
+
+      <div class="func-acc-item" data-idx="03">
+        <div class="func-acc-head"><span class="idx">03</span><span class="en">EXTENSION SERVICES</span><span class="jp">拡張サービス</span></div>
+        <div class="func-acc-body">
+        <div class="func-acc-body-inner">
+        <div class="func-grid">
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 58.36 56.38"><path d="M16.97,10.76v45.62H0V0l15.05,7.64c1.18.6,1.92,1.8,1.92,3.12Z" fill="currentColor"/><path d="M37.39,18.43v37.95h-16.97V9.01l14.96,6.38c1.22.52,2.01,1.72,2.01,3.04Z" fill="currentColor"/><path d="M58.36,10.97v45.41h-16.97V0l14.86,7.55c1.29.66,2.1,1.98,2.1,3.43Z" fill="currentColor"/></svg></div>
+          <h3>TECHNICAL<br>SEO</h3><div class="jp-sub">SEO拡張</div>
+          <p>検索構造やサイト導線を整理し、継続的な検索流入を形成します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 71.91 56.73"><path d="M39.57,22.83c1.98,1.98,3.96,3.97,5.95,5.95,8.29-8.24,16.58-16.49,24.82-24.78.75-.75,1.06-1.94,1.57-2.93-1.03-.36-2.06-1.03-3.1-1.03C57.87-.02,46.93,0,35.98,0h0C25.04.02,14.1-.01,3.15.06c-1.05,0-2.1.64-3.15.99.5.98.8,2.16,1.54,2.91,8.24,8.29,16.52,16.53,24.8,24.78,1.95-1.95,3.9-3.91,5.85-5.86,2.01-2.02,5.36-2.07,7.39-.04Z" fill="currentColor"/><path d="M45.52,28.79c-1.94,1.93-3.87,3.85-5.81,5.78-2.57,2.56-5.01,2.51-7.56-.04-1.94-1.93-3.87-3.86-5.81-5.79-8,8.02-16,16.04-23.96,24.1-.72.73-.94,1.97-1.39,2.97.98.31,1.96.88,2.94.88,10.61.06,21.22.04,31.82.04h0c10.78-.01,21.56.01,32.33-.05.9,0,1.79-.59,2.69-.9-.33-.89-.43-2.01-1.04-2.63-8.04-8.15-16.13-16.26-24.22-24.36Z" fill="currentColor"/></svg></div>
+          <h3>LISTING</h3><div class="jp-sub">リスティング広告</div>
+          <p>検索意図に基づいた広告運用により、成果につながる流入精度を最適化します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 71.1 58.14"><path d="M60.31,58.06c-2.49,0-5.01.21-7.47-.07-1.54-.18-3.38-.7-4.43-1.73C32.58,40.57,16.84,24.79,1.17,8.94.36,8.12.12,6.45.1,5.17.03-.32-.72-.03,5.13.03c3.46.03,6.92.03,10.38-.03,1.78-.03,3.17.55,4.44,1.82,16.53,16.66,33.03,33.34,49.62,49.93,2,2,1.72,4.61.93,5.4-.42.42-1.23.85-1.88.87-2.77.09-5.54.04-8.31.04Z" fill="currentColor"/><path d="M1.05,17.59c3.14,3.2,6.27,6.41,9.42,9.6,2.19,2.22,4.47,4.35,6.56,6.65.67.74,1.21,1.91,1.23,2.9.11,6.37.03,12.74.09,19.1.02,1.77-.75,2.27-2.39,2.25-4.5-.06-9-.07-13.5,0C.7,58.12,0,57.46,0,55.66c.05-11.98.03-23.95.05-35.93,0-.64.21-1.28.32-1.91.23-.08.45-.15.68-.23Z" fill="currentColor"/></svg></div>
+          <h3>SOCIAL AD</h3><div class="jp-sub">SNS広告</div>
+          <p>InstagramやTikTok広告の企画・制作・運用を行い、データに基づく広告運用を実現します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 64.05 65.49"><path d="M39.58,65.46c-7.02,0-14.05.1-21.07-.08-1.47-.04-3.22-.77-4.31-1.76-4.4-4.04-8.64-8.26-12.83-12.53-.75-.76-1.31-2.07-1.32-3.13C-.02,35.86-.02,23.76.09,11.65c.01-1.12.67-2.45,1.44-3.32C3.55,6.04,5.69,3.82,8.02,1.85,9.11.92,10.73.12,12.12.1,23.47-.04,34.83-.03,46.19.09c1.26.01,2.78.7,3.71,1.57,4.24,4,8.32,8.16,12.41,12.31.51.52.75,1.32,1.12,1.99-.7.17-1.39.48-2.09.48-13.97.03-27.95.02-41.92.02-2.84,0-2.92.08-2.93,2.85,0,9.27.04,18.53-.06,27.8-.02,2.17.72,2.89,2.84,2.87,8.52-.08,17.04-.07,25.55,0,1.93.01,2.61-.66,2.59-2.62-.08-7.85-.03-15.69-.02-23.54,0-2.82.21-3.02,3.1-3.04,3.66-.02,7.32.04,10.98-.03,1.78-.04,2.56.56,2.55,2.45-.05,13.23-.05,26.45,0,39.68,0,1.96-.84,2.63-2.72,2.61-7.25-.05-14.5-.02-21.74-.02h0Z" fill="currentColor"/></svg></div>
+          <h3>E-COMMERCE</h3><div class="jp-sub">ECサイト</div>
+          <p>EC設計から販売導線の運用までを管理し、オンライン収益の最大化を図ります。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 91.14 62.24"><path d="M91.14,30.49c-.34,12.18-5.01,21.44-15.22,27.21-14.18,8.02-30.94,2.39-38.43-12.55C28.15,26.54,38.93,4.74,59.1,1.45c14.25-2.33,28.53,8.26,31.35,23.28.39,2.08.52,4.22.7,5.76Z" fill="currentColor"/><path d="M.1,30.96C.1,21.65.15,12.33.06,3.02.03.7.77-.18,3.12.03c8.38.73,14.99,4.55,19.9,11.31,10,13.77,7.64,34.54-5.12,45.11-4.22,3.49-9.12,5.35-14.6,5.76-2.32.18-3.34-.44-3.3-3.04.14-9.4.05-18.81.05-28.21h.04Z" fill="currentColor"/></svg></div>
+          <h3>HR RECRUIT</h3><div class="jp-sub">人材採用</div>
+          <p>採用設計から媒体運用までを支援し、採用力と定着率を強化します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 67.7 65.49"><path d="M0,31.84C0,22.55,0,13.26,0,3.97,0,.8.78.02,3.99.01,22.65,0,41.32-.01,59.98.03c.94,0,1.89.51,2.83.78-.45.94-.69,2.09-1.38,2.78C42.05,22.94,22.62,42.25,3.17,61.54c-.56.55-1.45.76-2.18,1.13-.33-.82-.94-1.65-.94-2.47C-.02,50.74,0,41.29,0,31.84Z" fill="currentColor"/><path d="M43.43,65.49c-6.96,0-13.93.02-20.89-.03-.73,0-1.46-.38-2.18-.59.37-.65.61-1.43,1.12-1.93,14.39-14.24,28.81-28.46,43.25-42.65.62-.61,1.54-.91,2.32-1.35.21.89.61,1.78.61,2.66.04,13.37.04,26.73.03,40.1,0,3.05-.75,3.78-3.86,3.78-6.8.01-13.61,0-20.41,0Z" fill="currentColor"/></svg></div>
+          <h3>SAAS<br>DEVELOPMENT</h3><div class="jp-sub">SaaS開発</div>
+          <p>事業内容に応じたWebシステムや運用ツールを開発し、業務効率化と運用基盤の最適化を行います。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 66.26 62.24"><path d="M.08,14.61C11.01,9.68,21.6,4.9,32.22.16c.53-.23,1.35-.21,1.88.03,10.45,4.72,20.87,9.48,31.29,14.25.12.05.17.25.42.62-2.69,1.23-5.32,2.48-7.99,3.64-7.5,3.24-15.01,6.48-22.55,9.62-.98.41-2.38.63-3.3.24C21.63,24.24,11.35,19.78,1.05,15.35c-.21-.09-.38-.29-.97-.74Z" fill="currentColor"/><path d="M.06,47.9c4.9-2.14,9.34-4.14,13.84-5.97.63-.26,1.64.13,2.37.45,4.88,2.1,9.68,4.38,14.62,6.32,1.32.52,3.18.54,4.5.03,4.94-1.93,9.73-4.25,14.65-6.25,1.02-.42,2.49-.44,3.52-.03,4.11,1.63,8.13,3.5,12.7,5.51-3.78,1.68-6.99,3.1-10.2,4.54-6.92,3.11-13.82,6.28-20.78,9.28-1.1.47-2.72.64-3.77.18C21.16,57.45,10.88,52.77.06,47.9Z" fill="currentColor"/><path d="M0,31.43c4.71-2.03,8.93-3.93,13.23-5.63.79-.32,1.99-.06,2.85.29,4.59,1.89,9.2,3.78,13.68,5.9,2.31,1.1,4.31,1.21,6.66.1,4.49-2.12,9.08-4.04,13.71-5.84,1.11-.43,2.65-.47,3.75-.06,4,1.52,7.9,3.31,12.15,5.14-.76.48-1.19.84-1.68,1.06-9.62,4.27-19.22,8.58-28.91,12.69-1.28.54-3.18.52-4.46-.02-9.77-4.14-19.46-8.47-29.17-12.74-.45-.2-.88-.43-1.81-.89Z" fill="currentColor"/></svg></div>
+          <h3>APP<br>DEVELOPMENT</h3><div class="jp-sub">アプリ開発</div>
+          <p>ブランド独自のアプリを開発し、ユーザー体験とブランド接点を拡張します。</p>
+        </div>
+        <div class="func-card">
+          <div class="icon"><svg viewBox="0 0 77.57 64.33"><path d="M75.78,29.48c-5.32-3.87-10.66-7.7-16.01-11.54-7.98-5.73-15.91-11.53-23.99-17.11-1.18-.82-3.12-.97-4.59-.71-.54.09-1.01,2.25-1.02,3.47-.04,4.9-.05,9.79-.05,14.69,5.19,3.73,10.38,7.46,15.55,11.21,2.38,1.73,2.38,3.76.05,5.4-5.2,3.67-10.4,7.33-15.59,10.99,0,5.06,0,10.12,0,15.18,0,2.9,1.74,4.01,4.41,2.79.82-.38,1.56-.95,2.31-1.48,13-9.16,26-18.32,38.99-27.48,2.33-1.64,2.32-3.67-.05-5.4Z" fill="currentColor"/><path d="M30.12,18.27c-.15-.11-.31-.22-.46-.33C21.68,12.21,13.74,6.41,5.66.83,4.48,0,2.54-.14,1.07.11.53.21.07,2.36.05,3.58-.03,12.99,0,22.4,0,31.82c0,9.75,0,19.49,0,29.24,0,2.9,1.74,4.01,4.41,2.79.82-.38,1.56-.95,2.31-1.48,7.8-5.49,15.6-10.99,23.4-16.49,0-4.68,0-9.37,0-14.05,0-4.52,0-9.03,0-13.55Z" fill="currentColor"/></svg></div>
+          <h3>YOUTUBE</h3><div class="jp-sub">YouTube運用</div>
+          <p>動画コンテンツの企画・運用を通して、継続的なブランド接点を形成します。</p>
+        </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-yalofree" class="scroll-section" data-section="yalofree" data-charge-title=".yf-word, .yf-jp" data-charge-sub=".yf-lead">
+    <video id="yalofreeVideo" autoplay muted loop playsinline src="yaloree.mp4"></video>
+    <div class="yf-wrap">
+      <div class="yf-title-backdrop"></div>
+      <div class="yf-left">
+        <div class="yf-word">YALO</div>
+        <div class="yf-jp">経営診断</div>
+        <p class="yf-lead">現在の経営状態や課題を、YALOの診断機能で分析します。</p>
+        <p class="yf-note">ご興味のある方はエントリーください。</p>
+        <a href="#" class="yf-entry">ENTRY<span class="arrow">›</span></a>
+      </div>
+
+      <div class="yf-carousel">
+        <div class="yf-arrow prev" aria-label="prev">‹</div>
+        <div class="yf-track">
+          <div class="yf-card">
+            <div class="icon"><svg viewBox="0 0 39.17 36.69"><path d="M16.07,14.17c2.9,1.63,5.78,3.29,8.72,4.86.96.51,1.33,1.16,1.33,2.22-.03,4.63-.04,9.27,0,13.9.01,1.19-.47,1.54-1.6,1.53-3.48-.05-6.95-.05-10.43,0-1.16.02-1.57-.37-1.56-1.55.04-6.11.02-12.21.02-18.32,0-.93,0-1.85,0-2.97-.59,0-1.06,0-1.54,0-3.16,0-6.33-.02-9.49.01C.44,13.88-.02,13.46,0,12.36c.04-2.99,0-5.97.02-8.96C.03,1.85,1.79.03,3.35.03,14.76.01,26.17.02,37.58,0c1.08,0,1.57.45,1.57,1.5,0,3.65,0,7.31.02,10.96,0,1.14-.63,1.4-1.64,1.4-6.64-.02-13.28,0-19.92,0-.48,0-.96,0-1.44,0-.03.11-.06.21-.1.32Z" fill="currentColor"/></svg></div>
+            <h3>診断の目的</h3>
+            <ol>
+              <li><div class="li-title"><span class="num">①</span>事業の現状を客観的に把握</div><div class="li-desc">数値や傾向をもとに自社の現状を可視化し、経営判断の精度を高めます。</div></li>
+              <li><div class="li-title"><span class="num">②</span>課題の優先順位を可視化</div><div class="li-desc">改善すべき領域を明らかにすることで、効果的なアクションにつなげます。</div></li>
+              <li><div class="li-title"><span class="num">③</span>成長の方向性を明確化</div><div class="li-desc">強みを伸ばし、弱みを補う戦略のヒントを得て、持続的な成長を目指します。</div></li>
+            </ol>
+          </div>
+
+          <div class="yf-card">
+            <div class="icon"><svg viewBox="0 0 56.42 64.21"><path d="M56.39,32.33c0,4.58-.03,9.16.02,13.74.02,1.83-.61,3.06-2.26,4.05-7.16,4.31-14.23,8.76-21.35,13.13-2.35,1.44-2.69,1.23-2.71-1.42-.02-4.18-.11-8.37.06-12.54.04-1,.73-2.25,1.52-2.9,2.25-1.84,4.78-3.36,7.05-5.17.71-.57,1.38-1.67,1.41-2.55.15-4.24.04-8.49.1-12.74.02-1.36-.54-2.2-1.64-2.93-2.38-1.57-4.77-3.14-6.99-4.93-.8-.65-1.55-1.89-1.59-2.89-.17-4.44-.09-8.89-.05-13.34.01-1.77.53-2.1,2.04-1.17,7.64,4.67,15.29,9.32,22.82,14.16.88.56,1.45,2.21,1.49,3.38.17,4.71.07,9.42.07,14.13Z" fill="currentColor"/><path d="M26.1,0c.12.83.27,1.39.28,1.96.02,4.31-.02,8.63.03,12.94.02,1.55-.52,2.6-1.86,3.44-2.35,1.49-4.67,3.05-6.85,4.78-.75.6-1.4,1.79-1.44,2.73-.16,4.18-.16,8.36,0,12.54.03.95.69,2.14,1.44,2.76,2.31,1.88,4.84,3.5,7.2,5.32.62.48,1.34,1.32,1.36,2.01.11,4.91.06,9.82.04,14.73,0,.24-.18.49-.37,1-.81-.35-1.61-.58-2.3-1.01-7.3-4.46-14.61-8.91-21.82-13.51-.88-.56-1.68-2.02-1.69-3.07-.13-9.62-.14-19.25-.01-28.87.01-1.06.8-2.52,1.68-3.08C9.21,9.93,16.75,5.36,24.28.75c.48-.29,1.04-.44,1.82-.75Z" fill="currentColor"/></svg></div>
+            <h3>診断の流れ</h3>
+            <ol>
+              <li><div class="li-title"><span class="num">01</span>基本情報の入力</div><div class="li-desc">店舗や事業の基本情報を入力します。</div></li>
+              <li><div class="li-title"><span class="num">02</span>質問に回答</div><div class="li-desc">全項目の質問にご回答いただきます。</div></li>
+              <li><div class="li-title"><span class="num">03</span>診断結果の分析</div><div class="li-desc">YALOのデータをもとに分析を行います。</div></li>
+              <li><div class="li-title"><span class="num">04</span>結果のご確認</div><div class="li-desc">診断レポートで現状を確認できます。</div></li>
+            </ol>
+          </div>
+
+          <div class="yf-card image-card">
+            <div class="mock-grfo">
+              <div class="cap">問題 目的 診断</div>
+              <div class="brand">GRFO</div>
+              <div class="badges"><span class="b1">S</span><span class="b2">N</span><span class="b3">F</span><span class="b4">P</span></div>
+              <div class="bars"><span></span><span></span><span></span><span></span></div>
+              <div class="mock-diamond"></div>
+            </div>
+          </div>
+
+          <div class="yf-card image-card">
+            <div class="mock-report">
+              <div class="rhead"></div>
+              <div class="rline w80"></div>
+              <div class="rline w60"></div>
+              <div class="rline"></div>
+              <div class="rhead"></div>
+              <div class="rline w80"></div>
+              <div class="rline w40"></div>
+              <div class="rhead"></div>
+              <div class="rline w60"></div>
+              <div class="rline"></div>
+            </div>
+          </div>
+        </div>
+        <div class="yf-arrow next" aria-label="next">›</div>
+        <div class="yf-dots"><span class="active"></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec-pricing" class="scroll-section" data-section="pricing" data-scrollable data-charge-title=".price-title" data-charge-sub=".price-sub">
+    <div class="price-hero">
+      <div class="price-title"><span class="en">PRICING</span><span class="jp">料金プラン</span></div>
+      <p class="price-sub">事業の成長ステージに合わせて、最適なプランをお選びいただけます。</p>
+    </div>
+
+    <div class="price-table">
+      <div class="price-col">
+        <h3>STARTER</h3>
+        <div class="tagline">はじめての方に最適な</div>
+        <div class="plan-name">ライトプラン</div>
+        <div class="price">¥29,800<span class="unit">/月</span></div>
+        <div class="std-label">標準施策(すべて含む)</div>
+        <ul>
+          <li>YALO(経営構造解析エンジン)</li>
+          <li>業務システム</li>
+          <li>ブランドアイデンティティ</li>
+        </ul>
+        <div class="note">※一部提供内容が異なります</div>
+        <div class="mid-divider"></div>
+        <div class="select-title">選択サービス</div>
+        <div class="select-func">1 FUNCTION</div>
+        <div class="select-desc">選択施策より1施策をお選びいただけます。</div>
+        <ul>
+          <li>WEBプロダクト</li>
+          <li>SNSブランドコミュニケーション</li>
+          <li>APP運用</li>
+        </ul>
+      </div>
+
+      <div class="price-col">
+        <h3>PLUS</h3>
+        <div class="tagline">事業成長を加速する</div>
+        <div class="plan-name">スタンダードプラン</div>
+        <div class="price">¥46,000<span class="unit">/月</span></div>
+        <div class="std-label">標準施策(すべて含む)</div>
+        <ul>
+          <li>YALO(経営構造解析エンジン)</li>
+          <li>業務システム</li>
+          <li>ブランドアイデンティティ</li>
+        </ul>
+        <div class="mid-divider"></div>
+        <div class="select-title">選択サービス</div>
+        <div class="select-func">2 FUNCTION</div>
+        <div class="select-desc">選択施策より2施策をお選びいただけます。</div>
+        <ul>
+          <li>WEBプロダクト</li>
+          <li>SNSブランドコミュニケーション</li>
+          <li>APP運用</li>
+        </ul>
+      </div>
+
+      <div class="price-col">
+        <h3>PRO</h3>
+        <div class="tagline">高度な運用を実現する</div>
+        <div class="plan-name">プロフェッショナルプラン</div>
+        <div class="price">¥68,000<span class="unit">/月</span></div>
+        <div class="std-label">標準施策(すべて含む)</div>
+        <ul>
+          <li>YALO(経営構造解析エンジン)</li>
+          <li>業務システム</li>
+          <li>ブランドアイデンティティ</li>
+        </ul>
+        <div class="mid-divider"></div>
+        <div class="select-title">選択サービス</div>
+        <div class="select-func">ALL FUNCTION</div>
+        <div class="select-desc">すべての選択施策を実施します。</div>
+        <ul>
+          <li>WEBプロダクト</li>
+          <li>SNSブランドコミュニケーション</li>
+          <li>APP運用</li>
+        </ul>
+      </div>
+
+      <div class="price-col custom">
+        <h3>CUSTOM +</h3>
+        <div class="tagline">運用内容やニーズに応じた</div>
+        <div class="plan-name">カスタムプラン</div>
+        <div class="puzzle">
+          <svg viewBox="0 0 111.94 90.74"><path d="M45.45,45.2l-8.23-8.25c-.26-.26-.12-.7.24-.77.96-.17,1.88-.63,2.62-1.37,1.96-1.97,1.43-4.68-.61-6.6-1.9-1.8-4.48-2.26-6.35-.42-.76.75-1.22,1.68-1.39,2.65-.06.36-.51.5-.77.24l-8.23-8.25L0,45.2l22.72,22.77" fill="currentColor"/><path d="M22.72,67.97l22.72,22.77,22.72-22.77-8.23-8.25c-.26-.26-.12-.7.24-.77.97-.17,1.9-.64,2.65-1.4,1.83-1.87,1.37-4.45-.42-6.36-1.92-2.04-4.63-2.58-6.59-.61-.74.74-1.2,1.66-1.37,2.62-.06.36-.51.5-.77.24l-8.23-8.25" fill="currentColor"/><path d="M89.22,23.41l-8.23,8.25c-.26.26-.7.12-.77-.24-.17-.97-.64-1.9-1.39-2.65-1.86-1.84-4.44-1.37-6.35.42-2.04,1.92-2.58,4.63-.61,6.6.74.74,1.66,1.2,2.62,1.37.36.06.5.51.24.77l-8.23,8.25,8.23,8.25c.26.26.7.12.77-.24.17-.96.63-1.88,1.37-2.62,1.96-1.97,4.67-1.43,6.59.61,1.79,1.91,2.26,4.49.42,6.36-.75.76-1.67,1.22-2.65,1.4-.36.06-.5.51-.24.77l8.23,8.25,22.72-22.77-22.72-22.77Z" fill="currentColor"/><path d="M37.13,36.52c-.36.06-.5.51-.24.77l8.23,8.25,8.23-8.25c.26-.26.12-.7-.24-.77-.96-.17-1.88-.63-2.62-1.37-1.96-1.97-1.43-4.68.61-6.6,1.9-1.8,4.48-2.26,6.35-.42.76.75,1.22,1.68,1.39,2.65.06.36.51.5.77.24l8.23-8.25L45.12,0l-22.72,22.77" fill="currentColor"/></svg>
+        </div>
+        <p>ご要望に応じて、最適な構成をご提案します。ご要望に合わせた柔軟な設計が可能です。</p>
+      </div>
+    </div>
+    <div class="price-footnote">※ 表示価格はすべて税別です。</div>
+
+    <div class="ext-block">
+      <div class="ext-title"><span class="en">EXTENSION SERVICESS</span><span class="jp">拡張施策(オプション)</span></div>
+      <div class="ext-row">
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 71.1 58.14"><path d="M60.31,58.06c-2.49,0-5.01.21-7.47-.07-1.54-.18-3.38-.7-4.43-1.73C32.58,40.57,16.84,24.79,1.17,8.94.36,8.12.12,6.45.1,5.17.03-.32-.72-.03,5.13.03c3.46.03,6.92.03,10.38-.03,1.78-.03,3.17.55,4.44,1.82,16.53,16.66,33.03,33.34,49.62,49.93,2,2,1.72,4.61.93,5.4-.42.42-1.23.85-1.88.87-2.77.09-5.54.04-8.31.04Z" fill="currentColor"/><path d="M1.05,17.59c3.14,3.2,6.27,6.41,9.42,9.6,2.19,2.22,4.47,4.35,6.56,6.65.67.74,1.21,1.91,1.23,2.9.11,6.37.03,12.74.09,19.1.02,1.77-.75,2.27-2.39,2.25-4.5-.06-9-.07-13.5,0C.7,58.12,0,57.46,0,55.66c.05-11.98.03-23.95.05-35.93,0-.64.21-1.28.32-1.91.23-.08.45-.15.68-.23Z" fill="currentColor"/></svg></div>SNS広告</div>
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 71.91 56.73"><path d="M39.57,22.83c1.98,1.98,3.96,3.97,5.95,5.95,8.29-8.24,16.58-16.49,24.82-24.78.75-.75,1.06-1.94,1.57-2.93-1.03-.36-2.06-1.03-3.1-1.03C57.87-.02,46.93,0,35.98,0h0C25.04.02,14.1-.01,3.15.06c-1.05,0-2.1.64-3.15.99.5.98.8,2.16,1.54,2.91,8.24,8.29,16.52,16.53,24.8,24.78,1.95-1.95,3.9-3.91,5.85-5.86,2.01-2.02,5.36-2.07,7.39-.04Z" fill="currentColor"/><path d="M45.52,28.79c-1.94,1.93-3.87,3.85-5.81,5.78-2.57,2.56-5.01,2.51-7.56-.04-1.94-1.93-3.87-3.86-5.81-5.79-8,8.02-16,16.04-23.96,24.1-.72.73-.94,1.97-1.39,2.97.98.31,1.96.88,2.94.88,10.61.06,21.22.04,31.82.04h0c10.78-.01,21.56.01,32.33-.05.9,0,1.79-.59,2.69-.9-.33-.89-.43-2.01-1.04-2.63-8.04-8.15-16.13-16.26-24.22-24.36Z" fill="currentColor"/></svg></div>リスティング広告</div>
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 64.05 65.49"><path d="M39.58,65.46c-7.02,0-14.05.1-21.07-.08-1.47-.04-3.22-.77-4.31-1.76-4.4-4.04-8.64-8.26-12.83-12.53-.75-.76-1.31-2.07-1.32-3.13C-.02,35.86-.02,23.76.09,11.65c.01-1.12.67-2.45,1.44-3.32C3.55,6.04,5.69,3.82,8.02,1.85,9.11.92,10.73.12,12.12.1,23.47-.04,34.83-.03,46.19.09c1.26.01,2.78.7,3.71,1.57,4.24,4,8.32,8.16,12.41,12.31.51.52.75,1.32,1.12,1.99-.7.17-1.39.48-2.09.48-13.97.03-27.95.02-41.92.02-2.84,0-2.92.08-2.93,2.85,0,9.27.04,18.53-.06,27.8-.02,2.17.72,2.89,2.84,2.87,8.52-.08,17.04-.07,25.55,0,1.93.01,2.61-.66,2.59-2.62-.08-7.85-.03-15.69-.02-23.54,0-2.82.21-3.02,3.1-3.04,3.66-.02,7.32.04,10.98-.03,1.78-.04,2.56.56,2.55,2.45-.05,13.23-.05,26.45,0,39.68,0,1.96-.84,2.63-2.72,2.61-7.25-.05-14.5-.02-21.74-.02h0Z" fill="currentColor"/></svg></div>ECサイト</div>
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 91.14 62.24"><path d="M91.14,30.49c-.34,12.18-5.01,21.44-15.22,27.21-14.18,8.02-30.94,2.39-38.43-12.55C28.15,26.54,38.93,4.74,59.1,1.45c14.25-2.33,28.53,8.26,31.35,23.28.39,2.08.52,4.22.7,5.76Z" fill="currentColor"/><path d="M.1,30.96C.1,21.65.15,12.33.06,3.02.03.7.77-.18,3.12.03c8.38.73,14.99,4.55,19.9,11.31,10,13.77,7.64,34.54-5.12,45.11-4.22,3.49-9.12,5.35-14.6,5.76-2.32.18-3.34-.44-3.3-3.04.14-9.4.05-18.81.05-28.21h.04Z" fill="currentColor"/></svg></div>人材採用キャスティング</div>
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 58.36 56.38"><path d="M16.97,10.76v45.62H0V0l15.05,7.64c1.18.6,1.92,1.8,1.92,3.12Z" fill="currentColor"/><path d="M37.39,18.43v37.95h-16.97V9.01l14.96,6.38c1.22.52,2.01,1.72,2.01,3.04Z" fill="currentColor"/><path d="M58.36,10.97v45.41h-16.97V0l14.86,7.55c1.29.66,2.1,1.98,2.1,3.43Z" fill="currentColor"/></svg></div>SEO拡張</div>
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 67.7 65.49"><path d="M0,31.84C0,22.55,0,13.26,0,3.97,0,.8.78.02,3.99.01,22.65,0,41.32-.01,59.98.03c.94,0,1.89.51,2.83.78-.45.94-.69,2.09-1.38,2.78C42.05,22.94,22.62,42.25,3.17,61.54c-.56.55-1.45.76-2.18,1.13-.33-.82-.94-1.65-.94-2.47C-.02,50.74,0,41.29,0,31.84Z" fill="currentColor"/><path d="M43.43,65.49c-6.96,0-13.93.02-20.89-.03-.73,0-1.46-.38-2.18-.59.37-.65.61-1.43,1.12-1.93,14.39-14.24,28.81-28.46,43.25-42.65.62-.61,1.54-.91,2.32-1.35.21.89.61,1.78.61,2.66.04,13.37.04,26.73.03,40.1,0,3.05-.75,3.78-3.86,3.78-6.8.01-13.61,0-20.41,0Z" fill="currentColor"/></svg></div>SAAS開発</div>
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 66.26 62.24"><path d="M.08,14.61C11.01,9.68,21.6,4.9,32.22.16c.53-.23,1.35-.21,1.88.03,10.45,4.72,20.87,9.48,31.29,14.25.12.05.17.25.42.62-2.69,1.23-5.32,2.48-7.99,3.64-7.5,3.24-15.01,6.48-22.55,9.62-.98.41-2.38.63-3.3.24C21.63,24.24,11.35,19.78,1.05,15.35c-.21-.09-.38-.29-.97-.74Z" fill="currentColor"/><path d="M.06,47.9c4.9-2.14,9.34-4.14,13.84-5.97.63-.26,1.64.13,2.37.45,4.88,2.1,9.68,4.38,14.62,6.32,1.32.52,3.18.54,4.5.03,4.94-1.93,9.73-4.25,14.65-6.25,1.02-.42,2.49-.44,3.52-.03,4.11,1.63,8.13,3.5,12.7,5.51-3.78,1.68-6.99,3.1-10.2,4.54-6.92,3.11-13.82,6.28-20.78,9.28-1.1.47-2.72.64-3.77.18C21.16,57.45,10.88,52.77.06,47.9Z" fill="currentColor"/><path d="M0,31.43c4.71-2.03,8.93-3.93,13.23-5.63.79-.32,1.99-.06,2.85.29,4.59,1.89,9.2,3.78,13.68,5.9,2.31,1.1,4.31,1.21,6.66.1,4.49-2.12,9.08-4.04,13.71-5.84,1.11-.43,2.65-.47,3.75-.06,4,1.52,7.9,3.31,12.15,5.14-.76.48-1.19.84-1.68,1.06-9.62,4.27-19.22,8.58-28.91,12.69-1.28.54-3.18.52-4.46-.02-9.77-4.14-19.46-8.47-29.17-12.74-.45-.2-.88-.43-1.81-.89Z" fill="currentColor"/></svg></div>アプリ開発</div>
+        <div class="ext-item"><div class="icon"><svg viewBox="0 0 77.57 64.33"><path d="M75.78,29.48c-5.32-3.87-10.66-7.7-16.01-11.54-7.98-5.73-15.91-11.53-23.99-17.11-1.18-.82-3.12-.97-4.59-.71-.54.09-1.01,2.25-1.02,3.47-.04,4.9-.05,9.79-.05,14.69,5.19,3.73,10.38,7.46,15.55,11.21,2.38,1.73,2.38,3.76.05,5.4-5.2,3.67-10.4,7.33-15.59,10.99,0,5.06,0,10.12,0,15.18,0,2.9,1.74,4.01,4.41,2.79.82-.38,1.56-.95,2.31-1.48,13-9.16,26-18.32,38.99-27.48,2.33-1.64,2.32-3.67-.05-5.4Z" fill="currentColor"/><path d="M30.12,18.27c-.15-.11-.31-.22-.46-.33C21.68,12.21,13.74,6.41,5.66.83,4.48,0,2.54-.14,1.07.11.53.21.07,2.36.05,3.58-.03,12.99,0,22.4,0,31.82c0,9.75,0,19.49,0,29.24,0,2.9,1.74,4.01,4.41,2.79.82-.38,1.56-.95,2.31-1.48,7.8-5.49,15.6-10.99,23.4-16.49,0-4.68,0-9.37,0-14.05,0-4.52,0-9.03,0-13.55Z" fill="currentColor"/></svg></div>YouTube</div>
+      </div>
+    </div>
+
+    <div class="price-cta">
+      <p class="cta-note">ご不明点やご相談は、お気軽にお問い合わせください。</p>
+      <a href="#" class="cta-btn">お問い合わせフォーム<span class="arrow">›</span></a>
+      <a href="#" class="terms-link">利用規約・サービス条件はこちら　⟶</a>
+    </div>
+  </section>
+
+  <section id="sec-step" class="scroll-section" data-section="step" data-scrollable data-charge-title=".step-title" data-charge-sub=".step-sub">
+    <div id="stepGlassStage"><div class="step-bg-color"></div></div>
+    <div class="step-hero">
+      <div class="step-title"><span class="en">STEP</span><span class="jp">導入ステップ</span></div>
+      <p class="step-sub">お問い合わせから運用開始まで、最短6つのステップで進行します。</p>
+    </div>
+
+    <div class="step-list">
+      <div class="step-row">
+        <div class="step-num">01</div><div class="step-divider"></div>
+        <div class="step-en">ENTRY</div><div class="step-jp">エントリー</div><div class="step-divider"></div>
+        <div class="step-desc">お問い合わせフォームよりご連絡ください。<br>内容を確認のうえ、担当者よりご連絡します。</div>
+      </div>
+      <div class="step-connector">⌄</div>
+
+      <div class="step-row">
+        <div class="step-num">02</div><div class="step-divider"></div>
+        <div class="step-en">PROPOSAL</div><div class="step-jp">サービス案内</div><div class="step-divider"></div>
+        <div class="step-desc">事業状況をヒアリングし、サービス内容や運用内容をご案内します。</div>
+      </div>
+      <div class="step-connector">⌄</div>
+
+      <div class="step-row">
+        <div class="step-num">03</div><div class="step-divider"></div>
+        <div class="step-en">CONTRACT</div><div class="step-jp">ご契約</div><div class="step-divider"></div>
+        <div class="step-desc">ご契約手続きを行い、必要書類や事業情報をご共有いただきます。<br>初期費用の決済確認後、初期解析を開始します。</div>
+      </div>
+      <div class="step-connector">⌄</div>
+
+      <div class="step-row">
+        <div class="step-num">04</div><div class="step-divider"></div>
+        <div class="step-en">INITIAL<br>ANALYSIS</div><div class="step-jp">初期解析</div><div class="step-divider"></div>
+        <div class="step-desc">初期経営構造解析を実施し、現状の構造や課題を可視化・整理します。</div>
+      </div>
+      <div class="step-connector">⌄</div>
+
+      <div class="step-row">
+        <div class="step-num">05</div><div class="step-divider"></div>
+        <div class="step-en">REPORT</div><div class="step-jp">レポートご提出</div><div class="step-divider"></div>
+        <div class="step-desc">解析結果をもとにレポートをご提出します。<br>レポート確認後、運用プランを決定します。</div>
+      </div>
+      <div class="step-connector">⌄</div>
+
+      <div class="step-row">
+        <div class="step-num">06</div><div class="step-divider"></div>
+        <div class="step-en">OPERATION</div><div class="step-jp">運用開始</div><div class="step-divider"></div>
+        <div class="step-desc">施策の実行と分析を継続し、事業運用を最適化します。</div>
+      </div>
+    </div>
+
+    <div class="faq-block">
+      <div class="faq-title"><span class="en">FAQ</span><span class="jp">よくあるご質問</span></div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>どのプランを選べばよいですか?</div>
+        <div class="faq-a"><p>初期経営構造解析の結果をもとに、事業状況や課題に応じた最適なプランをご提案します。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>契約前に相談することは可能ですか?</div>
+        <div class="faq-a"><p>可能です。サービス内容や進め方、ご予算などについてお気軽にご相談ください。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>何を準備すればよいですか?</div>
+        <div class="faq-a"><p>ご契約後、ヒアリングシートへのご回答および必要資料のご共有をお願いしています。事業内容に応じて、決算書やPOSデータなどをご共有いただく場合があります。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>どの業種でも利用できますか?</div>
+        <div class="faq-a"><p>業種を問わずご利用いただけます。事業内容や規模に応じて、最適な構成をご提案します。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>月額費用以外に費用はかかりますか?</div>
+        <div class="faq-a"><p>契約時に初期経営構造解析費として48,000円(税別)が発生します。また、拡張施策をご希望の場合は、別途費用が発生します。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>支払い方法を教えてください。</div>
+        <div class="faq-a"><p>原則としてクレジットカード決済となります。当社が認めた場合に限り、銀行振込その他の支払い方法をご利用いただけます。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>希望するサービスが月額プランに含まれていない場合はどうすればよいですか?</div>
+        <div class="faq-a"><p>WEOONでは、事業内容やご要望に応じたCUSTOM+をご用意しています。月額プランに含まれていないサービスについても、内容に応じて個別にご提案が可能です。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>契約期間や解約条件について教えてください。</div>
+        <div class="faq-a">
+          <p>本サービスでは、各サービスごとに6ヶ月〜12ヶ月程度の設計期間を設定しています。期間内の解約については、契約内容に基づき精算が発生する場合があります。契約期間満了後は、所定の手続きにより解約が可能です。</p>
+          <p>また、制作された成果物の取り扱いについては契約内容に基づき個別に定めています。著作権、使用権、譲渡、買取の可否については内容に応じてご提示します。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="chev">⌄</span>データや事業情報の管理は安全ですか?</div>
+        <div class="faq-a">
+          <p>クラウド環境による管理、アクセス権限の制御、通信の暗号化、定期的なバックアップなどを実施しています。</p>
+          <p>また、秘密保持契約(NDA)に基づき適切に管理しています。</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="faq-note">該当する内容が見つからない場合は、お問い合わせフォーム よりご連絡ください。</p>
+  </section>
+
+  <section id="sec-message" class="scroll-section" data-section="message" data-charge-title=".msg-text">
+    <div class="msg-line"></div>
+    <div class="msg-wrap">
+      <p class="msg-text">個別の施策や断片的な改善といった<br>表層のアプローチの積み重ねでは<br>イノベーションは起きません。<br>すべての機能は、接続されることで<br>事業価値を最大化します。<br>経営を構造から設計することで<br>ブランドは継続的な進化を続けます。</p>
+    </div>
+  </section>
+
+  <section id="sec-footer" class="scroll-section" data-section="footer" data-charge-title=".f-word" data-charge-sub=".f-talk">
+    <div class="footer-wrap">
+      <div class="footer-bg-color"></div>
+      <div class="deco-line" style="left:18%; top:0; width:58%; transform:rotate(46deg);"></div>
+      <div class="deco-line" style="left:18%; top:22%; width:44%; transform:rotate(90deg);"></div>
+      <div class="deco-dot" style="left:75%; top:35%;"></div>
+      <div class="deco-dot" style="left:74%; top:39%;"></div>
+      <div class="f-contact">
+        <div class="label">CONTACT</div>
+        <div class="addr">1-4-11-1710 ARIAKE,KOTO-KU,<br>TOKYO 135-0063</div>
+        <div class="insta"><svg viewBox="0 0 25 25"><path d="M7.32.09c-1.33.06-2.24.28-3.03.59-.82.32-1.52.75-2.21,1.45-.69.7-1.12,1.39-1.44,2.22-.31.8-.52,1.7-.58,3.04C0,8.7,0,9.13,0,12.52c0,3.39.02,3.82.09,5.15.06,1.33.28,2.24.59,3.03.32.82.75,1.52,1.45,2.21.7.69,1.39,1.12,2.22,1.44.8.31,1.7.52,3.03.58,1.33.06,1.76.07,5.15.07,3.4,0,3.82-.02,5.15-.08,1.33-.06,2.24-.28,3.03-.59.82-.32,1.52-.75,2.21-1.45.69-.7,1.12-1.39,1.44-2.22.31-.8.52-1.7.58-3.03.06-1.33.07-1.76.07-5.15,0-3.39-.02-3.82-.09-5.15-.06-1.33-.28-2.24-.59-3.03-.32-.82-.75-1.52-1.45-2.21-.7-.69-1.39-1.12-2.22-1.44-.8-.31-1.7-.52-3.03-.58C16.3,0,15.87,0,12.48,0c-3.39,0-3.82.02-5.15.09M7.47,22.68c-1.22-.05-1.88-.26-2.32-.43-.58-.23-1-.5-1.44-.93-.44-.44-.71-.85-.94-1.44-.17-.44-.38-1.1-.43-2.32-.06-1.32-.08-1.71-.08-5.05,0-3.34,0-3.73.06-5.05.05-1.22.26-1.88.43-2.32.23-.58.5-1,.93-1.44.44-.44.85-.71,1.44-.94.44-.17,1.1-.38,2.32-.43,1.32-.06,1.71-.08,5.05-.08,3.34,0,3.73,0,5.05.06,1.22.05,1.88.25,2.32.43.58.23,1,.5,1.44.93.44.44.71.85.94,1.44.17.44.38,1.1.43,2.32.06,1.32.08,1.71.08,5.05,0,3.34,0,3.73-.06,5.05-.05,1.22-.26,1.88-.43,2.32-.23.58-.5,1-.93,1.44-.44.44-.85.71-1.44.94-.44.17-1.1.38-2.32.43-1.32.06-1.71.08-5.05.08-3.34,0-3.73,0-5.05-.06M17.66,5.82c0,.83.67,1.5,1.5,1.5.83,0,1.5-.67,1.5-1.5,0-.83-.67-1.5-1.5-1.5-.83,0-1.5.67-1.5,1.5M6.08,12.51c0,3.55,2.89,6.41,6.43,6.41,3.54,0,6.41-2.89,6.41-6.43,0-3.54-2.89-6.41-6.43-6.41-3.54,0-6.41,2.89-6.41,6.43M8.33,12.51c0-2.3,1.86-4.17,4.16-4.17,2.3,0,4.17,1.86,4.17,4.16,0,2.3-1.86,4.17-4.16,4.17-2.3,0-4.17-1.86-4.17-4.16" fill="currentColor"/></svg></div>
+      </div>
+
+      <div class="f-policy">
+        <div class="label">POLICY</div>
+        <a href="#">Privacy Policy</a><a href="#">Cookie Policy</a><a href="#">Terms</a>
+      </div>
+
+      <div class="f-talk">
+        <div class="eyebrow">Let’s Talk</div>
+        <a href="#">お問い合わせフォーム <span>→</span></a>
+      </div>
+
+      <div class="f-word">WEOON</div>
+      <div class="f-copy">© WEOON</div>
+    </div>
+  </section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/BokehShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/BokehPass.js"></script>
+
+<script>
+/* ===================================================================
+   HERO: 背景ブロブのアンビエント動作 + マウス追従
+=================================================================== */
+(function(){
+try{
+}catch(err){ console.error('[hero-blobs] init failed:', err); }
+})();
+
+/* ===================================================================
+   HERO: WEOONロゴの位置・サイズ・色・フォント調整パネル(一時ツール)
+=================================================================== */
+(function(){
+try{
+  var logo = document.querySelector('#sec-hero .logo');
+  if (!logo) return;
+
+  function wire(id, valId, onChange, isRange){
+    var el = document.getElementById(id);
+    var val = valId ? document.getElementById(valId) : null;
+    if (!el) return;
+    el.addEventListener('input', function(){
+      var v = isRange === false ? el.value : parseFloat(el.value);
+      onChange(v);
+      if (val) val.textContent = v;
+    });
+  }
+
+  wire('heroPosX', 'heroPosXVal', function(v){ logo.style.left = v + '%'; });
+  wire('heroPosY', 'heroPosYVal', function(v){ logo.style.bottom = v + '%'; });
+  wire('heroSize', 'heroSizeVal', function(v){ logo.style.fontSize = v + 'px'; });
+  wire('heroColor', null, function(v){ logo.style.color = v; }, false);
+  wire('heroFont', null, function(v){ logo.style.fontFamily = v; }, false);
+}catch(err){ console.error('[hero-text-panel] init failed:', err); }
+})();
+
+
+
+/* ===================================================================
+   BRANDING: design-frame(1440px基準)をビューポート幅に応じて自動スケール
+   モックが1440px基準で作られているため、実際のブラウザ幅が1440pxと
+   異なると絶対座標がズレて見える問題への対応。
+=================================================================== */
+(function(){
+try{
+  var frame = document.querySelector('#sec-branding .design-frame');
+  if (!frame) return;
+  var MOCK_WIDTH = 1440;
+  var MOCK_HEIGHT = 900;
+  function scaleFrame(){
+    var s = window.innerWidth / MOCK_WIDTH;
+    var scaledHeight = MOCK_HEIGHT * s;
+    // 縦横比が1440:900と違うウィンドウ(横長・縦長どちらも)では、
+    // スケール後の高さが実際のビューポート高さと一致しないため、
+    // 縦方向は中央寄せにして、はみ出し・余りを上下に均等に逃がす。
+    var offsetY = (window.innerHeight - scaledHeight) / 2;
+    frame.style.transform = 'scale(' + s + ')';
+    frame.style.top = offsetY + 'px';
+  }
+  window.addEventListener('resize', scaleFrame);
+  scaleFrame();
+}catch(err){ console.error('[branding-design-frame] init failed:', err); }
+})();
+
+/* ===================================================================
+   YALO: design-frame(1440px基準)をビューポートに応じて自動スケール
+=================================================================== */
+(function(){
+try{
+  var frame = document.querySelector('#sec-yalo .design-frame');
+  if (!frame) return;
+  var MOCK_WIDTH = 1440;
+  var MOCK_HEIGHT = 900;
+  function scaleFrame(){
+    var s = window.innerWidth / MOCK_WIDTH;
+    var scaledHeight = MOCK_HEIGHT * s;
+    var offsetY = (window.innerHeight - scaledHeight) / 2;
+    frame.style.transform = 'scale(' + s + ')';
+    frame.style.top = offsetY + 'px';
+  }
+  window.addEventListener('resize', scaleFrame);
+  scaleFrame();
+}catch(err){ console.error('[yalo-design-frame] init failed:', err); }
+})();
+
+</script>
+
+<script>
+
+/* ===================================================================
+   HERO: Three.js コンステレーション(三角網目)ネットワーク
+=================================================================== */
+(function(){
+try{
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, .1, 100);
+  camera.position.set(0, 0, 12);
+
+  const COUNT = 70;
+  const spread = { x: 16, y: 9 };
+  const nodes = [];
+  for(let i=0;i<COUNT;i++){
+    nodes.push({
+      pos: new THREE.Vector3(
+        (Math.random()-.5)*spread.x,
+        (Math.random()-.35)*spread.y + 1.5,
+        (Math.random()-.5)*4
+      ),
+      drift: new THREE.Vector3((Math.random()-.5)*.02, (Math.random()-.5)*.02, 0),
+      phase: Math.random()*Math.PI*2
+    });
+  }
+
+  const pointGeo = new THREE.BufferGeometry();
+  const pointPos = new Float32Array(COUNT*3);
+  nodes.forEach((n,i)=>{ pointPos[i*3]=n.pos.x; pointPos[i*3+1]=n.pos.y; pointPos[i*3+2]=n.pos.z; });
+  pointGeo.setAttribute('position', new THREE.BufferAttribute(pointPos, 3));
+  const pointMat = new THREE.PointsMaterial({ color:0xeaf0f6, size:.05, transparent:true, opacity:.75 });
+  const points = new THREE.Points(pointGeo, pointMat);
+  scene.add(points);
+
+  const MAX_DIST = 2.6;
+  const lineGeo = new THREE.BufferGeometry();
+  const lineMat = new THREE.LineBasicMaterial({ color:0xbfd2e8, transparent:true, opacity:.35 });
+  const lineMesh = new THREE.LineSegments(lineGeo, lineMat);
+  scene.add(lineMesh);
+
+  function rebuildLines(){
+    const verts = [];
+    for(let i=0;i<COUNT;i++){
+      for(let j=i+1;j<COUNT;j++){
+        const d = nodes[i].pos.distanceTo(nodes[j].pos);
+        if(d < MAX_DIST){
+          verts.push(nodes[i].pos.x, nodes[i].pos.y, nodes[i].pos.z);
+          verts.push(nodes[j].pos.x, nodes[j].pos.y, nodes[j].pos.z);
+        }
+      }
+    }
+    lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
+    lineGeo.attributes.position.needsUpdate = true;
+  }
+  rebuildLines();
+
+  const mouse = { x:0, y:0 };
+  window.addEventListener('mousemove', (e)=>{
+    mouse.x = (e.clientX/window.innerWidth)*2-1;
+    mouse.y = (e.clientY/window.innerHeight)*2-1;
+  });
+
+  let frame = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    frame++;
+
+    nodes.forEach(n=>{
+      n.pos.x += n.drift.x;
+      n.pos.y += n.drift.y;
+      if(Math.abs(n.pos.x) > spread.x/2) n.drift.x *= -1;
+      if(n.pos.y > spread.y || n.pos.y < -2) n.drift.y *= -1;
+    });
+    const posAttr = pointGeo.attributes.position;
+    nodes.forEach((n,i)=>{ posAttr.setXYZ(i, n.pos.x, n.pos.y, n.pos.z); });
+    posAttr.needsUpdate = true;
+
+    if(frame % 6 === 0) rebuildLines();
+
+    camera.position.x += (mouse.x*.8 - camera.position.x)*.02;
+    camera.position.y += (-mouse.y*.5 - camera.position.y)*.02;
+    camera.lookAt(0,1,0);
+
+    if(!window.__sectionVisible || window.__sectionVisible['sec-hero'] !== false){
+      renderer.render(scene, camera);
+    }
+  }
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+}catch(err){ console.error('[hero-net] init failed:', err); }
+})();
+
+/* ===================================================================
+   BRANDING: Three.js 背景(ガラスディスク+氷色グラデーション + bloom/DoF)
+=================================================================== */
+</script>
+
+
+
+<script>
+
+/* ===================================================================
+   YALO: 背景をパーティクルスフィア(カール・ノイズ+マウスで押し引き)に変更
+=================================================================== */
+(function(){
+try{
+  const wrap = document.getElementById('yaloCanvasWrap');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(20, window.innerWidth/window.innerHeight, 0.1, 150);
+  camera.position.set(0, 0, 50);
+
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.22;
+  wrap.appendChild(renderer.domElement);
+
+  // ---- selective bloom setup ----
+  // Only objects tagged with BLOOM_LAYER contribute brightness to the bloom pass.
+  // Everything else (background, dark rim) gets swapped to solid black during the
+  // bloom-only render, so a bright background can never itself bloom.
+  const BLOOM_LAYER = 1;
+  const bloomLayer = new THREE.Layers();
+  bloomLayer.set(BLOOM_LAYER);
+  const darkMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+  const materialCache = {};
+  function darkenNonBloomed(obj){
+    if ((obj.isMesh || obj.isInstancedMesh) && bloomLayer.test(obj.layers) === false) {
+      materialCache[obj.uuid] = obj.material;
+      obj.material = darkMaterial;
+    }
+  }
+  function restoreMaterial(obj){
+    if (materialCache[obj.uuid]) {
+      obj.material = materialCache[obj.uuid];
+      delete materialCache[obj.uuid];
+    }
+  }
+
+  const bloomComposer = new THREE.EffectComposer(renderer);
+  bloomComposer.renderToScreen = false;
+  bloomComposer.addPass(new THREE.RenderPass(scene, camera));
+  const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.05, 0.75, 0.48);
+  bloomComposer.addPass(bloomPass);
+
+  const combineShader = {
+    uniforms: { tDiffuse: { value: null }, tBloom: { value: null }, bloomAmount: { value: 0.79 } },
+    vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+    fragmentShader: `
+      uniform sampler2D tDiffuse; uniform sampler2D tBloom; uniform float bloomAmount;
+      varying vec2 vUv;
+      void main(){
+        vec4 base = texture2D(tDiffuse, vUv);
+        vec4 bloom = texture2D(tBloom, vUv);
+        gl_FragColor = vec4(base.rgb + bloom.rgb * bloomAmount, base.a);
+      }
+    `
+  };
+  const composer = new THREE.EffectComposer(renderer);
+  composer.addPass(new THREE.RenderPass(scene, camera));
+  const combinePass = new THREE.ShaderPass(combineShader);
+  composer.addPass(combinePass);
+  const bokehPass = new THREE.BokehPass(scene, camera, {
+    focus: 23.5,
+    aperture: 0.0012,
+    maxblur: 0.002,
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+  composer.addPass(bokehPass);
+  bokehPass.renderToScreen = true;
+
+  const bgCanvas = document.createElement('canvas');
+  const BG_S = 1024;
+  bgCanvas.width = bgCanvas.height = BG_S;
+  const bgCtx = bgCanvas.getContext('2d');
+  const bgTex = new THREE.CanvasTexture(bgCanvas);
+
+  const bgParams = {
+    color0: '#587bb3',
+    color1: '#92a7d1',
+    color2: '#7f98c8',
+    color3: '#728ec2',
+    speed: 1.78,
+    moveAmount: 10,
+    radiusAmount: 15,
+    blur: 15,
+    blend: 1.0,
+    blobSize: 90,
+    mixSpread: 2.0
+  };
+
+  const bgBlobs = [
+    { baseX: 8,  baseY: 8,  baseR: 60, phase: 0.3 },
+    { baseX: 36, baseY: 36, baseR: 60, phase: 1.9 },
+    { baseX: 64, baseY: 64, baseR: 60, phase: 3.4 },
+    { baseX: 92, baseY: 92, baseR: 60, phase: 5.1 },
+  ];
+
+  const bgClock = new THREE.Clock();
+  const bgScratch = document.createElement('canvas');
+  bgScratch.width = bgScratch.height = BG_S;
+  const bgScratchCtx = bgScratch.getContext('2d');
+
+  function drawBackgroundTexture() {
+    const s = BG_S;
+
+    bgScratchCtx.clearRect(0, 0, s, s);
+    // 右肩下がりの斜め4分割。境目の位置がゆっくり前後に揺れるようにする。
+    bgScratchCtx.globalCompositeOperation = 'source-over';
+    const colors = [bgParams.color0, bgParams.color1, bgParams.color2, bgParams.color3];
+    const t = bgClock.getElapsedTime() * bgParams.speed;
+    const shift = Math.sin(t * 0.35) * 0.12;
+    const b1 = Math.min(0.98, Math.max(0.02, 0.25 + shift));
+    const b2 = Math.min(0.99, Math.max(b1 + 0.01, 0.50 + shift * 0.6));
+    const b3 = Math.min(1.00, Math.max(b2 + 0.01, 0.75 - shift * 0.6));
+    const diag = bgScratchCtx.createLinearGradient(s, 0, 0, s);
+    diag.addColorStop(0.00, colors[0]);
+    diag.addColorStop(b1, colors[0]);
+    diag.addColorStop(b1, colors[1]);
+    diag.addColorStop(b2, colors[1]);
+    diag.addColorStop(b2, colors[2]);
+    diag.addColorStop(b3, colors[2]);
+    diag.addColorStop(b3, colors[3]);
+    diag.addColorStop(1.00, colors[3]);
+    bgScratchCtx.fillStyle = diag;
+    bgScratchCtx.fillRect(0, 0, s, s);
+
+    bgCtx.clearRect(0, 0, s, s);
+    bgCtx.save();
+    bgCtx.filter = 'blur(' + bgParams.blur + 'px)';
+    bgCtx.drawImage(bgScratch, 0, 0);
+    bgCtx.restore();
+
+    const streak = bgCtx.createLinearGradient(s, s * 0.35, s * 0.35, s);
+    streak.addColorStop(0, 'rgba(255,255,255,0.35)');
+    streak.addColorStop(0.5, 'rgba(255,255,255,0.0)');
+    streak.addColorStop(1, 'rgba(255,255,255,0.0)');
+    bgCtx.fillStyle = streak;
+    bgCtx.fillRect(0, 0, s, s);
+
+    bgTex.needsUpdate = true;
+  }
+  drawBackgroundTexture();
+
+  // ---------- YALO背景ブロブ調整パネル(一時ツール) ----------
+  (function(){
+    function wireRange(id, valId, onChange){
+      var el = document.getElementById(id);
+      var val = document.getElementById(valId);
+      if (!el) return;
+      el.addEventListener('input', function(){
+        var v = parseFloat(el.value);
+        onChange(v);
+        if (val) val.textContent = v;
+      });
+    }
+    function wireColor(id, onChange){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', function(){ onChange(el.value); });
+    }
+    wireRange('ybSpeed', 'ybSpeedVal', function(v){ bgParams.speed = v; });
+    wireRange('ybBlur', 'ybBlurVal', function(v){ bgParams.blur = v; });
+    wireColor('ybColor0', function(v){ bgParams.color0 = v; });
+    wireColor('ybColor1', function(v){ bgParams.color1 = v; });
+    wireColor('ybColor2', function(v){ bgParams.color2 = v; });
+    wireColor('ybColor3', function(v){ bgParams.color3 = v; });
+  })();
+  const bgPlaneMat = new THREE.MeshBasicMaterial({ map: bgTex, toneMapped: false, depthWrite: false, depthTest: false });
+  const BG_PLANE_BASE = 400;
+  const bgPlane = new THREE.Mesh(new THREE.PlaneGeometry(BG_PLANE_BASE, BG_PLANE_BASE), bgPlaneMat);
+  bgPlane.position.set(0, 0, -60);
+  bgPlane.renderOrder = -1;
+  scene.add(bgPlane);
+
+  function fitBgPlaneToView(){
+    const dist = camera.position.z - bgPlane.position.z;
+    const vFov = camera.fov * Math.PI / 180;
+    const visibleHeight = 2 * Math.tan(vFov / 2) * dist;
+    const visibleWidth = visibleHeight * camera.aspect;
+    // small margin so edges never peek in on resize/aspect changes
+    bgPlane.scale.set((visibleWidth * 1.05) / BG_PLANE_BASE, (visibleHeight * 1.05) / BG_PLANE_BASE, 1);
+  }
+  fitBgPlaneToView();
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 3.4); scene.add(ambientLight);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 4.7); keyLight.position.set(0, 2, 24); scene.add(keyLight);
+  const fillLight = new THREE.DirectionalLight(0xbcd4f5, 0); fillLight.position.set(8, -4, -6); scene.add(fillLight);
+  const rimLight = new THREE.DirectionalLight(0xffffff, 0); rimLight.position.set(-10, 8, -15); scene.add(rimLight);
+  const topLight = new THREE.DirectionalLight(0xffffff, 0); topLight.position.set(0, 15, 5); scene.add(topLight);
+  const bottomLight = new THREE.DirectionalLight(0xffffff, 0); bottomLight.position.set(0, -15, 8); scene.add(bottomLight);
+  const leftLight = new THREE.DirectionalLight(0xffffff, 0); leftLight.position.set(-15, 0, 10); scene.add(leftLight);
+  const rightLight = new THREE.DirectionalLight(0xffffff, 0); rightLight.position.set(15, 3, 6); scene.add(rightLight);
+  const backLight = new THREE.DirectionalLight(0xffffff, 0); backLight.position.set(0, -2, -24); scene.add(backLight);
+
+  const COUNT = 2100;
+  const RADIUS = 8.5;
+  const positions = new Float32Array(COUNT * 3);
+  const velocities= new Float32Array(COUNT * 3);
+  const sizes     = new Float32Array(COUNT);
+  const seeds     = new Float32Array(COUNT);
+  const category  = new Uint8Array(COUNT);
+  const localIndex= new Uint32Array(COUNT);
+
+  function saturate(hex, mult, lOverride) {
+    const c = new THREE.Color(hex);
+    const hsl = { h:0, s:0, l:0 };
+    c.getHSL(hsl);
+    c.setHSL(hsl.h, 1.0, lOverride !== undefined ? lOverride : hsl.l);
+    return c.multiplyScalar(mult);
+  }
+  const catColors = [
+    new THREE.Color(0x00ccff),
+    new THREE.Color(0xff1a7d),
+    new THREE.Color(0xffa200)
+  ];
+  const catCounts = [0, 0, 0];
+
+  for (let i = 0; i < COUNT; i++) {
+    const u = Math.random(), v = Math.random();
+    const theta = 2 * Math.PI * u;
+    const phi = Math.acos(2 * v - 1);
+    const r = RADIUS * (0.75 + Math.random() * 0.35);
+    positions[i*3]   = Math.sin(phi) * Math.cos(theta) * r;
+    positions[i*3+1] = Math.sin(phi) * Math.sin(theta) * r;
+    positions[i*3+2] = Math.cos(phi) * r;
+
+    const roll = Math.random();
+    const cat = roll < 0.7 ? 0 : (roll < 0.8 ? 1 : 2);
+    category[i] = cat;
+    localIndex[i] = catCounts[cat]++;
+
+    sizes[i] = Math.random() * 0.3 + 0.58;
+    seeds[i] = Math.random() * 1000;
+  }
+
+  function createEnvTexture() {
+    const size = 128;
+    const faces = [];
+    for (let i = 0; i < 6; i++) {
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const grad = ctx.createLinearGradient(0, 0, 0, size);
+      grad.addColorStop(0, '#f5f9ff');
+      grad.addColorStop(0.5, '#cfe0f5');
+      grad.addColorStop(1, '#7fa8dc');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, size, size);
+      faces.push(canvas);
+    }
+    const tex = new THREE.CubeTexture(faces);
+    tex.needsUpdate = true;
+    return tex;
+  }
+  const envTex = createEnvTexture();
+
+  const particleGroup = new THREE.Group();
+  particleGroup.position.set(-12.1, 1.2, 20);
+  particleGroup.scale.setScalar(1.04);
+  scene.add(particleGroup);
+
+  const params = {
+    sizeScale: 0.055,
+    glowSizeMult: 1,
+    glowOpacity: 0,
+    glowVisible: true,
+    rimVisible: true,
+    rimOpacity: 0,
+    rimSizeMult: 1.5,
+    sparkleEnabled: true,
+    sparkleSpeed: 0.1,
+    sparkleSharpness: 1,
+    sparkleMin: 0,
+    roughness: 0,
+    metalness: 0.1,
+    envMapIntensity: 0,
+    emissiveIntensity: 0,
+    exposure: 0.22,
+    transmission: 0.05,
+    thickness: 5,
+    ior: 1,
+    clearcoat: 0,
+    clearcoatRoughness: 0,
+    bloomStrength: 1.05,
+    bloomRadius: 0.75,
+    bloomThreshold: 0.48,
+    bloomAmount: 0.79
+  };
+
+  const dummy = new THREE.Object3D();
+  function createGlowTexture(){
+    const size = 128;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+    g.addColorStop(0.0, 'rgba(255,255,255,1)');
+    g.addColorStop(0.25, 'rgba(255,255,255,0.55)');
+    g.addColorStop(0.6, 'rgba(255,255,255,0.12)');
+    g.addColorStop(1.0, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    const tex = new THREE.CanvasTexture(canvas);
+    return tex;
+  }
+  const glowTex = createGlowTexture();
+  const glowGeo = new THREE.PlaneGeometry(2, 2);
+
+  function createRimTexture(){
+    const size = 128;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+    g.addColorStop(0.0, 'rgba(0,0,0,0)');
+    g.addColorStop(0.45, 'rgba(0,0,0,0)');
+    g.addColorStop(0.7, 'rgba(0,0,0,0.45)');
+    g.addColorStop(1.0, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(canvas);
+  }
+  const rimTex = createRimTexture();
+  const rimGeo = new THREE.PlaneGeometry(2, 2);
+
+  const sphereGeo = new THREE.SphereGeometry(1, 10, 8);
+  const meshes = [], glowMeshes = [], rimMeshes = [], coreMaterials = [], glowMaterials = [], rimMaterials = [];
+  for (let c = 0; c < 3; c++) {
+    const rimMaterial = new THREE.MeshBasicMaterial({
+      color: 0x000000, map: rimTex, transparent: true, opacity: params.rimOpacity,
+      depthTest: false, depthWrite: false, blending: THREE.NormalBlending
+    });
+    const rm = new THREE.InstancedMesh(rimGeo, rimMaterial, Math.max(catCounts[c], 1));
+    rm.frustumCulled = false;
+    rimMeshes.push(rm);
+    rimMaterials.push(rimMaterial);
+    particleGroup.add(rm);
+
+    const coreMaterial = new THREE.MeshPhysicalMaterial({
+      color: catColors[c], emissive: catColors[c].clone(), emissiveIntensity: params.emissiveIntensity,
+      roughness: params.roughness, metalness: params.metalness, envMap: envTex, envMapIntensity: params.envMapIntensity,
+      transmission: params.transmission, thickness: params.thickness, ior: params.ior,
+      clearcoat: params.clearcoat, clearcoatRoughness: params.clearcoatRoughness
+    });
+    const m = new THREE.InstancedMesh(sphereGeo, coreMaterial, Math.max(catCounts[c], 1));
+    m.frustumCulled = false;
+    m.layers.enable(BLOOM_LAYER);
+    meshes.push(m);
+    coreMaterials.push(coreMaterial);
+
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: catColors[c], map: glowTex, transparent: true, opacity: params.glowOpacity,
+      depthTest: false, depthWrite: false,
+      blending: THREE.CustomBlending, blendEquation: THREE.MaxEquation, blendSrc: THREE.OneFactor, blendDst: THREE.OneFactor
+    });
+    const g = new THREE.InstancedMesh(glowGeo, glowMaterial, Math.max(catCounts[c], 1));
+    g.frustumCulled = false;
+    g.layers.enable(BLOOM_LAYER);
+    glowMeshes.push(g);
+    glowMaterials.push(glowMaterial);
+    particleGroup.add(m);
+  }
+
+  for (let i = 0; i < COUNT; i++) {
+    const c = category[i], li = localIndex[i];
+    dummy.position.set(positions[i*3], positions[i*3+1], positions[i*3+2]);
+    dummy.scale.setScalar(sizes[i] * params.sizeScale * params.rimSizeMult);
+    dummy.updateMatrix();
+    rimMeshes[c].setMatrixAt(li, dummy.matrix);
+    dummy.scale.setScalar(sizes[i] * params.sizeScale);
+    dummy.updateMatrix();
+    meshes[c].setMatrixAt(li, dummy.matrix);
+    dummy.scale.setScalar(sizes[i] * params.sizeScale * params.glowSizeMult);
+    dummy.updateMatrix();
+    glowMeshes[c].setMatrixAt(li, dummy.matrix);
+  }
+  for (let c = 0; c < 3; c++) {
+    meshes[c].instanceMatrix.needsUpdate = true;
+    glowMeshes[c].instanceMatrix.needsUpdate = true;
+    rimMeshes[c].instanceMatrix.needsUpdate = true;
+  }
+
+  function curl(x, y, z, t, freqLow, freqHigh, out) {
+    const a1 = freqLow, a2 = freqHigh;
+    const sYt  = Math.sin(a1*y + t),        cYt  = Math.cos(a1*y + t);
+    const sZt  = Math.sin(a2*z + t),        cZt  = Math.cos(a2*z + t);
+    const sZt2 = Math.sin(a1*z + t*1.1),    cZt2 = Math.cos(a1*z + t*1.1);
+    const sXt  = Math.sin(a2*x + t*0.9),    cXt  = Math.cos(a2*x + t*0.9);
+    const sXt2 = Math.sin(a1*x + t*0.8),    cXt2 = Math.cos(a1*x + t*0.8);
+    const sYt2 = Math.sin(a2*y + t*1.2),    cYt2 = Math.cos(a2*y + t*1.2);
+    out.x = (-a2 * sXt2 * sYt2) - (a1 * cZt2 * cXt);
+    out.y = (-a2 * sYt * sZt)   - (a1 * cXt2 * cYt2);
+    out.z = (-a2 * sZt2 * sXt)  - (a1 * cYt * cZt);
+  }
+  const curlLow = { x:0, y:0, z:0 };
+  const curlHigh = { x:0, y:0, z:0 };
+
+  const raycaster = new THREE.Raycaster();
+  const mouseNDC = new THREE.Vector2(-10, -10);
+  const dragPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+  const mouseWorld = new THREE.Vector3();
+  let mode = 0;
+  let mouseActive = false;
+
+  function updateMouseWorld() {
+    raycaster.setFromCamera(mouseNDC, camera);
+    dragPlane.normal.copy(camera.getWorldDirection(new THREE.Vector3())).negate();
+    dragPlane.constant = 0;
+    raycaster.ray.intersectPlane(dragPlane, mouseWorld);
+  }
+  function setNDC(e) {
+    mouseNDC.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseNDC.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  }
+
+  renderer.domElement.addEventListener('contextmenu', e => e.preventDefault());
+  renderer.domElement.addEventListener('mousedown', e => {
+    setNDC(e); mouseActive = true; mode = (e.button === 2) ? -1 : 1; updateMouseWorld();
+  });
+  window.addEventListener('mouseup', () => { mouseActive = false; mode = 0; });
+  window.addEventListener('mousemove', e => {
+    setNDC(e); if (mouseActive) updateMouseWorld();
+  });
+  renderer.domElement.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    mouseNDC.x = (t.clientX / window.innerWidth) * 2 - 1;
+    mouseNDC.y = -(t.clientY / window.innerHeight) * 2 + 1;
+    mouseActive = true; mode = 1; updateMouseWorld();
+  }, { passive:true });
+  renderer.domElement.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    mouseNDC.x = (t.clientX / window.innerWidth) * 2 - 1;
+    mouseNDC.y = -(t.clientY / window.innerHeight) * 2 + 1;
+    updateMouseWorld();
+  }, { passive:true });
+  window.addEventListener('touchend', () => { mouseActive = false; mode = 0; });
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
+    bokehPass.uniforms['aspect'].value = camera.aspect;
+    bloomPass.setSize(window.innerWidth, window.innerHeight);
+    bloomComposer.setSize(window.innerWidth, window.innerHeight);
+    fitBgPlaneToView();
+  });
+
+  const clock = new THREE.Clock();
+  const SPEED_SCALE = 0.55, CURL_STRENGTH_LOW = 0.55, CURL_STRENGTH_HIGH = 0.45;
+  const JITTER_STRENGTH = 0.028, CONTAIN_STRENGTH = 0.01, DAMPING = 0.94;
+  const MOUSE_RADIUS = 7.5, MOUSE_STRENGTH = 0.09;
+  const DRIFT_X = 0.02, RIGHT_LEAK_FACTOR = 0.95;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (window.__sectionVisible && window.__sectionVisible['sec-yalo'] === false) return;
+
+    const t = clock.getElapsedTime() * SPEED_SCALE;
+    const tSparkle = clock.getElapsedTime() * params.sparkleSpeed;
+    const pulseCycle = 9.0, pulseSharpness = 10.0, pulseStrength = 14.0;
+    const pulsePhase = (t % pulseCycle) / pulseCycle;
+    const pulse = 1.0 + pulseStrength * Math.pow(Math.max(0, Math.sin(pulsePhase * Math.PI)), pulseSharpness);
+
+    for (let i = 0; i < COUNT; i++) {
+      const ix = i*3, iy = i*3+1, iz = i*3+2;
+      const px = positions[ix], py = positions[iy], pz = positions[iz];
+
+      curl(px*0.09, py*0.09, pz*0.09, t*0.35 + seeds[i]*0.001, 0.35, 0.5, curlLow);
+      curl(px*0.25, py*0.25, pz*0.25, t*0.9 + seeds[i]*0.01, 0.9, 1.3, curlHigh);
+
+      velocities[ix] += (curlLow.x * CURL_STRENGTH_LOW + curlHigh.x * CURL_STRENGTH_HIGH) * 0.02 * SPEED_SCALE;
+      velocities[iy] += (curlLow.y * CURL_STRENGTH_LOW + curlHigh.y * CURL_STRENGTH_HIGH) * 0.02 * SPEED_SCALE;
+      velocities[iz] += (curlLow.z * CURL_STRENGTH_LOW + curlHigh.z * CURL_STRENGTH_HIGH) * 0.02 * SPEED_SCALE;
+
+      velocities[ix] += (Math.random() - 0.5) * JITTER_STRENGTH * SPEED_SCALE;
+      velocities[iy] += (Math.random() - 0.5) * JITTER_STRENGTH * SPEED_SCALE;
+      velocities[iz] += (Math.random() - 0.5) * JITTER_STRENGTH * SPEED_SCALE;
+
+      const dist = Math.sqrt(px*px + py*py + pz*pz) + 0.0001;
+      const overshoot = dist - RADIUS;
+      const cosAngle = px / dist;
+      const leakCone = Math.max(0, (cosAngle + 0.2) / 1.2);
+
+      if (overshoot > 0.5) {
+        const sideEase = 1.0 - RIGHT_LEAK_FACTOR * leakCone * (1.0 / pulse);
+        const f = overshoot * CONTAIN_STRENGTH * pulse * (overshoot > 0 ? 1.6 : 0.4) * sideEase;
+        velocities[ix] -= (px / dist) * f;
+        velocities[iy] -= (py / dist) * f;
+        velocities[iz] -= (pz / dist) * f;
+      }
+      if (leakCone > 0) {
+        velocities[ix] += DRIFT_X * leakCone * leakCone * SPEED_SCALE / pulse;
+      }
+
+      if (mode !== 0) {
+        const gx = (mouseWorld.x - particleGroup.position.x) / particleGroup.scale.x;
+        const gy = (mouseWorld.y - particleGroup.position.y) / particleGroup.scale.y;
+        const gz = (mouseWorld.z - particleGroup.position.z) / particleGroup.scale.z;
+        const dx = gx - px, dy = gy - py, dz = gz - pz;
+        const distSq = dx*dx + dy*dy + dz*dz;
+        if (distSq < MOUSE_RADIUS * MOUSE_RADIUS) {
+          const d = Math.sqrt(distSq) + 0.001;
+          const falloff = 1.0 - d / MOUSE_RADIUS;
+          const f = mode * MOUSE_STRENGTH * falloff * falloff;
+          velocities[ix] += (dx / d) * f;
+          velocities[iy] += (dy / d) * f;
+          velocities[iz] += (dz / d) * f;
+        }
+      }
+
+      velocities[ix] *= DAMPING; velocities[iy] *= DAMPING; velocities[iz] *= DAMPING;
+      positions[ix] = px + velocities[ix];
+      positions[iy] = py + velocities[iy];
+      positions[iz] = pz + velocities[iz];
+
+      const newDist = Math.sqrt(positions[ix]*positions[ix] + positions[iy]*positions[iy] + positions[iz]*positions[iz]);
+      if (newDist > RADIUS * 6.0) {
+        const u = Math.random(), v = Math.random();
+        const theta = 2 * Math.PI * u;
+        const phi = Math.acos(2 * v - 1);
+        const r = RADIUS * (0.5 + Math.random() * 0.3);
+        positions[ix] = Math.sin(phi) * Math.cos(theta) * r * -1;
+        positions[iy] = Math.sin(phi) * Math.sin(theta) * r;
+        positions[iz] = Math.cos(phi) * r;
+        velocities[ix] = 0; velocities[iy] = 0; velocities[iz] = 0;
+      }
+
+      dummy.position.set(positions[ix], positions[iy], positions[iz]);
+      const c = category[i], li = localIndex[i];
+      dummy.scale.setScalar(sizes[i] * params.sizeScale * params.rimSizeMult);
+      dummy.updateMatrix();
+      rimMeshes[c].setMatrixAt(li, dummy.matrix);
+      dummy.scale.setScalar(sizes[i] * params.sizeScale);
+      dummy.updateMatrix();
+      meshes[c].setMatrixAt(li, dummy.matrix);
+
+      let glowScale = sizes[i] * params.sizeScale * params.glowSizeMult;
+      if (params.sparkleEnabled) {
+        const freq = 0.6 + (seeds[i] % 41) * 0.045;
+        const phase = seeds[i] * 0.017;
+        const raw = Math.sin(tSparkle * freq + phase);
+        const sparkle = Math.pow(Math.max(0, raw), params.sparkleSharpness);
+        glowScale *= params.sparkleMin + (1.0 - params.sparkleMin) * sparkle;
+      }
+      dummy.scale.setScalar(glowScale);
+      dummy.updateMatrix();
+      glowMeshes[c].setMatrixAt(li, dummy.matrix);
+    }
+
+    for (let c = 0; c < 3; c++) {
+      meshes[c].instanceMatrix.needsUpdate = true;
+      glowMeshes[c].instanceMatrix.needsUpdate = true;
+      rimMeshes[c].instanceMatrix.needsUpdate = true;
+    }
+    drawBackgroundTexture();
+
+    scene.traverse(darkenNonBloomed);
+    bloomComposer.render();
+    scene.traverse(restoreMaterial);
+    combinePass.uniforms.tBloom.value = bloomComposer.readBuffer.texture;
+    composer.render();
+  }
+  animate();
+}catch(err){ console.error('[yalo-bg] init failed:', err); }
+})();
+
+/* ===================================================================
+   YALOFREE: カードの自動カルーセル
+=================================================================== */
+(function(){
+try{
+  var track = document.querySelector('#sec-yalofree .yf-track');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#sec-yalofree .yf-card'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('#sec-yalofree .yf-dots span'));
+  var prevBtn = document.querySelector('#sec-yalofree .yf-arrow.prev');
+  var nextBtn = document.querySelector('#sec-yalofree .yf-arrow.next');
+  if (!track || !cards.length) return;
+
+  var index = 0;
+  var autoTimer = null;
+  var AUTO_MS = 4200;
+
+  function cardStep(){
+    var style = getComputedStyle(track);
+    var gap = parseFloat(style.columnGap || style.gap || 22);
+    return cards[0].getBoundingClientRect().width + gap;
+  }
+
+  function render(){
+    track.style.transform = 'translateX(-' + (index * cardStep()) + 'px)';
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === index); });
+  }
+
+  function goTo(i){
+    index = (i + cards.length) % cards.length;
+    render();
+  }
+
+  function startAuto(){
+    stopAuto();
+    autoTimer = setInterval(function(){ goTo(index + 1); }, AUTO_MS);
+  }
+  function stopAuto(){
+    if (autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+  }
+  function restartAuto(){ startAuto(); }
+
+  if (prevBtn) prevBtn.addEventListener('click', function(){ goTo(index - 1); restartAuto(); });
+  if (nextBtn) nextBtn.addEventListener('click', function(){ goTo(index + 1); restartAuto(); });
+  dots.forEach(function(d, i){
+    d.addEventListener('click', function(){ goTo(i); restartAuto(); });
+  });
+
+  window.addEventListener('resize', render);
+
+  var sec = document.getElementById('sec-yalofree');
+  window.addEventListener('wo:sectionchange', function(){
+    if (sec.classList.contains('active')) startAuto(); else stopAuto();
+  });
+  if (sec.classList.contains('active')) startAuto();
+
+  render();
+}catch(err){ console.error('[yalofree-carousel] init failed:', err); }
+})();
+
+/* ===================================================================
+   STEP/FAQ: アコーディオン開閉
+=================================================================== */
+(function(){
+try{
+  var items = Array.prototype.slice.call(document.querySelectorAll('#sec-step .faq-item'));
+  items.forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      items.forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = '';
+      });
+      if (!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 40 + 'px';
+      }
+    });
+  });
+}catch(err){ console.error('[faq-accordion] init failed:', err); }
+})();
+
+/* ===================================================================
+   FUNCTIONS: STANDARD/SELECTIVE/EXTENSIONを、見出しが上に積み上がっていく
+   スタック方式に(webisoft.comの c-stacking と同じ position:sticky の重ね方)
+=================================================================== */
+(function(){
+try{
+  var items = Array.prototype.slice.call(document.querySelectorAll('#sec-functions .func-acc-item'));
+  var functionsSec = document.getElementById('sec-functions');
+
+  // 各見出しのsticky top位置を、直前までの見出しの高さの合計にする。
+  // これで、見出しが画面外に消えず、上から順に積み重なって残る。
+  function layoutStickyHeads(){
+    var offset = 0;
+    items.forEach(function(item){
+      var head = item.querySelector('.func-acc-head');
+      head.style.top = offset + 'px';
+      offset += head.offsetHeight;
+    });
+  }
+  layoutStickyHeads();
+  window.addEventListener('resize', layoutStickyHeads);
+  window.addEventListener('wo:sectionchange', layoutStickyHeads);
+
+  // カード部分は視界に入ったタイミングでふわっと現れる
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) entry.target.classList.add('inview');
+    });
+  }, { root: functionsSec, threshold: 0.15 });
+
+  items.forEach(function(item){ io.observe(item); });
+}catch(err){ console.error('[functions-accordion] init failed:', err); }
+})();
+
+/* ===================================================================
+   STEP: 背景色(グラデーション)をGSAPでゆっくり揺らす
+=================================================================== */
+(function(){
+try{
+  var el = document.querySelector('#sec-step .step-bg-color');
+  if (el){
+    gsap.to(el, {
+      '--glowX': '78%', '--glowY': '12%',
+      duration: 6.5, ease: 'sine.inOut', repeat: -1, yoyo: true
+    });
+  }
+}catch(err){ console.error('[step-bgcolor] init failed:', err); }
+})();
+
+/* ===================================================================
+   FOOTER: 背景色(STEPと同じグラデーション)をGSAPでゆっくり揺らす
+=================================================================== */
+(function(){
+try{
+  var el = document.querySelector('#sec-footer .footer-bg-color');
+  if (el){
+    gsap.to(el, {
+      '--glowX': '78%', '--glowY': '12%',
+      duration: 6.5, ease: 'sine.inOut', repeat: -1, yoyo: true
+    });
+  }
+}catch(err){ console.error('[footer-bgcolor] init failed:', err); }
+})();
+
+
+/* ===================================================================
+   GSAP TEXT MOTION — entrance + section-specific scroll-linked typography
+=================================================================== */
+(function(){
+try{
+  if (!window.gsap) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var played = {};
+  function chars(el){
+    if(!el) return [];
+    if(el.dataset.woSplit==='chars') return el.querySelectorAll('.wo-char');
+    var t=el.textContent; el.textContent='';
+    Array.from(t).forEach(function(c){var s=document.createElement('span');s.className='wo-char';s.innerHTML=c===' '?'&nbsp;':c;el.appendChild(s)});
+    el.dataset.woSplit='chars'; return el.querySelectorAll('.wo-char');
+  }
+  function headlineWords(el){
+    if(!el) return [];
+    if(el.dataset.woSplit==='words') return el.querySelectorAll('.wo-word');
+    Array.from(el.childNodes).forEach(function(n){
+      if(n.nodeType===3 && n.textContent.trim()){
+        var s=document.createElement('span');s.className='wo-word';s.textContent=n.textContent;n.replaceWith(s);
+      }else if(n.nodeType===1 && n.tagName!=='BR'){n.classList.add('wo-word')}
+    });
+    el.dataset.woSplit='words'; return el.querySelectorAll('.wo-word');
+  }
+  function hero(){
+    if(played.hero||reduced)return;played.hero=1;
+    var c=chars(document.querySelector('#sec-hero .logo'));
+    gsap.set(c,{transformOrigin:'50% 100%',transformPerspective:900});
+    gsap.fromTo(c,{yPercent:115,opacity:0,rotationX:42,filter:'blur(9px)'},{yPercent:0,opacity:1,rotationX:0,filter:'blur(0px)',duration:1.15,stagger:.055,ease:'power4.out',delay:.22,clearProps:'filter'});
+  }
+  function branding(){
+    if(played.branding||reduced)return;played.branding=1;
+    var words=headlineWords(document.querySelector('#sec-branding .headline'));
+    gsap.timeline({defaults:{ease:'power4.out'}})
+      .fromTo('#sec-branding .eyebrow > span',{y:26,opacity:0,filter:'blur(6px)'},{y:0,opacity:1,filter:'blur(0px)',duration:.8,stagger:.09},.05)
+      .fromTo(words,{yPercent:105,opacity:0,filter:'blur(7px)'},{yPercent:0,opacity:1,filter:'blur(0px)',duration:1,stagger:.1},.18)
+      .fromTo('#sec-branding .copy p',{y:18,opacity:0},{y:0,opacity:1,duration:.8,stagger:.12,ease:'power3.out'},.62);
+  }
+  function yalo(){
+    if(played.yalo||reduced)return;played.yalo=1;
+    var c=chars(document.querySelector('#sec-yalo .word'));
+    gsap.timeline({defaults:{ease:'power4.out'}})
+      .fromTo(c,{yPercent:120,opacity:0,rotationX:35},{yPercent:0,opacity:1,rotationX:0,duration:.9,stagger:.07},.04)
+      .fromTo('#sec-yalo .eyebrow',{x:-25,opacity:0},{x:0,opacity:1,duration:.7},.18)
+      .fromTo('#sec-yalo .lead',{y:18,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out'},.43)
+      .fromTo('#sec-yalo .kw',{y:22,opacity:0},{y:0,opacity:1,duration:.65,stagger:.07,ease:'power3.out'},.53)
+      .fromTo('#sec-yalo .card',{y:30,opacity:0},{y:0,opacity:1,duration:.75,stagger:.1,ease:'power3.out'},.68);
+  }
+  function generic(key,title,sub){
+    if(played[key]||reduced)return;played[key]=1;
+    gsap.timeline({defaults:{ease:'power4.out'}})
+      .fromTo(title,{y:34,opacity:0,filter:'blur(7px)'},{y:0,opacity:1,filter:'blur(0px)',duration:.9,clearProps:'filter'},.05)
+      .fromTo(sub,{y:18,opacity:0},{y:0,opacity:1,duration:.75,ease:'power3.out'},.27);
+  }
+  function message(){
+    if(played.message||reduced)return;played.message=1;
+    var el=document.querySelector('#sec-message .msg-text'); if(!el)return;
+    Array.from(el.childNodes).forEach(function(n){if(n.nodeType===3&&n.textContent.trim()){var m=document.createElement('span'),i=document.createElement('span');m.className='wo-line-mask';i.className='wo-word';i.textContent=n.textContent;m.appendChild(i);n.replaceWith(m)}});
+    gsap.fromTo('#sec-message .wo-word',{yPercent:115,opacity:0},{yPercent:0,opacity:1,duration:1.05,stagger:.14,ease:'power4.out'});
+  }
+  function footer(){
+    if(played.footer||reduced)return;played.footer=1;
+    var c=chars(document.querySelector('#sec-footer .f-word'));
+    gsap.timeline({defaults:{ease:'power4.out'}})
+      .fromTo('#sec-footer .f-talk',{y:25,opacity:0},{y:0,opacity:1,duration:.8},.05)
+      .fromTo(c,{yPercent:100,opacity:0},{yPercent:0,opacity:1,duration:.85,stagger:.045},.16)
+      .fromTo('#sec-footer .f-contact, #sec-footer .f-policy, #sec-footer .f-copy',{opacity:0},{opacity:1,duration:.8,stagger:.08,ease:'power2.out'},.35);
+  }
+  function play(id){
+    if(id==='sec-hero')hero(); else if(id==='sec-branding')branding(); else if(id==='sec-yalo')yalo();
+    else if(id==='sec-functions')generic('functions','#sec-functions .func-title','#sec-functions .func-lead, #sec-functions .func-sub');
+    else if(id==='sec-yalofree')generic('yalofree','#sec-yalofree .yf-word, #sec-yalofree .yf-jp','#sec-yalofree .yf-lead, #sec-yalofree .yf-note, #sec-yalofree .yf-entry');
+    else if(id==='sec-pricing')generic('pricing','#sec-pricing .price-title','#sec-pricing .price-sub');
+    else if(id==='sec-step')generic('step','#sec-step .step-title','#sec-step .step-sub');
+    else if(id==='sec-message')message(); else if(id==='sec-footer')footer();
+  }
+  requestAnimationFrame(hero);
+  window.addEventListener('wo:sectionchange',function(e){play(e.detail.id)});
+}catch(err){console.error('[wo-text-motion] init failed:',err)}
+})();
+
+/* ===================================================================
+   HEAVY SCROLL ENGINE
+   heavy-scroll-prototype.html のロジックをそのまま移植。
+   1. ホイール/タッチの入力は即座に画面を動かさず accum に溜める
+   2. accum が THRESHOLD を超えた瞬間だけ次/前セクションへ遷移開始
+   3. 遷移中は入力を受け付けず、expo-out + 微小オーバーシュートで
+      DURATION 秒かけて current -> target を動かす
+   4. 各セクションは absolute 配置。translateY(vh * (i-index)) で積み重ねる
+   5. 溜めている間(accum > 0)は、現在のセクションの見出し/本文だけが
+      押し返される+縮む+フェードし、背景がわずかに暗くパンする
+=================================================================== */
+(function(){
+  var header = document.getElementById('global-header');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.scroll-section'));
+
+  var LIGHT_SECTIONS = { 'sec-branding': true, 'sec-yalo': true, 'sec-functions': true, 'sec-yalofree': true, 'sec-pricing': true, 'sec-step': true, 'sec-message': true, 'sec-footer': true };
+
+  var current = 0;
+  window.__sectionVisible = {};
+  sections.forEach(function(sec, i){ window.__sectionVisible[sec.id] = (i === 0); });
+
+  function updateHeaderTheme(){
+    var light = !!LIGHT_SECTIONS[sections[current].id];
+    header.classList.toggle('onlight', light);
+    header.classList.toggle('ondark', !light);
+    var isHero = sections[current].id === 'sec-hero';
+    header.style.opacity = isHero ? '0' : '1';
+    header.style.pointerEvents = isHero ? 'none' : 'auto';
+
+    // FUNCTIONSセクションの間は「YALO / ENGINE」「FUNCTIONS」を非表示にする
+    var isFunctions = sections[current].id === 'sec-functions';
+    var ghRight = header.querySelector('.gh-right');
+    var ghFunctions = header.querySelector('.gh-functions');
+    if (ghRight) ghRight.style.opacity = isFunctions ? '0' : '1';
+    if (ghFunctions) ghFunctions.style.opacity = isFunctions ? '0' : '1';
+  }
+
+  // ---------------------------------------------------------------
+  // 通常のネイティブスクロールに変更。各セクションは普通に縦に並んでいて、
+  // ブラウザ標準のスクロールでそのまま流れる。どのセクションが今
+  // 画面の主役か(=.activeクラス、ヘッダーの配色、各セクション固有の
+  // JS が参照する window.__sectionVisible、wo:sectionchange イベント)
+  // だけを IntersectionObserver で管理する。
+  // ---------------------------------------------------------------
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var idx = sections.indexOf(entry.target);
+      window.__sectionVisible[entry.target.id] = entry.isIntersecting;
+    });
+
+    // 画面内に一番大きく写っているセクションを「現在のセクション」とする
+    var best = -1, bestRatio = 0;
+    sections.forEach(function(sec, i){
+      var rect = sec.getBoundingClientRect();
+      var visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      var ratio = Math.max(0, visibleHeight) / window.innerHeight;
+      if (ratio > bestRatio){ bestRatio = ratio; best = i; }
+    });
+    if (best >= 0 && best !== current){
+      sections[current].classList.remove('active');
+      current = best;
+      sections[current].classList.add('active');
+      updateHeaderTheme();
+      window.dispatchEvent(new CustomEvent('wo:sectionchange', { detail: { index: current, id: sections[current].id } }));
+    }
+  }, { threshold: [0, .1, .25, .5, .75, 1] });
+
+  sections.forEach(function(sec){ observer.observe(sec); });
+
+  sections[0].classList.add('active');
+  updateHeaderTheme();
+
+  // --- グローバルヘッダーのナビリンク: 該当セクションへ普通にスクロール ---
+  document.querySelectorAll('#global-header a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var id = a.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if (target) target.scrollIntoView({ behavior:'smooth' });
+    });
+  });
+})();
+
+/* ===================================================================
+   PIN + SCRUB(newformcap.com方式)
+   各セクションを、画面に入ったところで一旦固定(pin)し、その状態の
+   まま追加でスクロールした分だけ、要素・文字の出現アニメーションが
+   進む(scrub)。アニメーションを最後まで進めきると、固定が解除され
+   通常のスクロールで次のセクションへ進めるようになる。
+=================================================================== */
+(function(){
+try{
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // セクションごとに「出現させたい要素」を順番に指定。
+  // 配列内の各グループが、順番にフェード+スライドインする。
+  var REVEAL_MAP = {
+    'sec-hero':       ['.logo'],
+    'sec-branding':   ['.eyebrow', '.headline', '.copy'],
+    'sec-yalo':       ['.eyebrow', '.word', '.kw', '.lead', '.card'],
+    'sec-functions':  ['.func-title', '.func-lead', '.func-sub'],
+    'sec-yalofree':   ['.yf-word, .yf-jp', '.yf-lead', '.yf-note, .yf-entry', '.yf-card'],
+    'sec-pricing':    ['.price-title', '.price-sub', '.price-col'],
+    'sec-step':       ['.step-title', '.step-sub', '.step-row'],
+    'sec-message':    ['.msg-text'],
+    'sec-footer':     ['.f-word', '.f-talk', '.f-contact, .f-policy, .f-copy']
+  };
+  var PIN_LENGTH = '+=70%'; // 固定している間にスクロールを要求する量(画面の70%分)
+
+  // FUNCTIONSはsection全体をpinすると、積み上げ演出(.func-accordion)の
+  // 祖先にtransformが付いてposition:stickyが壊れてしまう(旧エンジンの
+  // ときと同じ問題)。そのためpinの対象はイントロ部分(.func-hero)だけに
+  // 限定し、.func-accordionはpin/transformの影響を受けないようにする。
+  var PIN_TRIGGER_OVERRIDE = { 'sec-functions': '.func-hero' };
+
+  Object.keys(REVEAL_MAP).forEach(function(id){
+    var sec = document.getElementById(id);
+    if (!sec) return;
+    var groups = REVEAL_MAP[id].map(function(sel){
+      return sec.querySelectorAll(sel);
+    }).filter(function(els){ return els.length; });
+    if (!groups.length) return;
+
+    var triggerEl = sec;
+    if (PIN_TRIGGER_OVERRIDE[id]){
+      var override = sec.querySelector(PIN_TRIGGER_OVERRIDE[id]);
+      if (override) triggerEl = override;
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: triggerEl,
+        start: 'top top',
+        end: PIN_LENGTH,
+        pin: true,
+        scrub: 0.6,
+        anticipatePin: 1
+      }
+    });
+    groups.forEach(function(els, i){
+      tl.from(els, { opacity:0, y:44, stagger:0.08, duration:1, ease:'power2.out' }, i * 0.32);
+    });
+  });
+}catch(err){ console.error('[pin-scrub] init failed:', err); }
+})();
+
+/* ===================================================================
+   SMOOTH SCROLL(スクロール感度を落として、もっと遅延・重みのある動きに)
+   実際のスクロール量(target)と、画面に反映される位置(current)を分けて、
+   毎フレームcurrentをtargetに少しずつ近づける(lerp)。EASEが小さいほど
+   遅れが大きく、重厚な感触になる(studiochapeaux.com を参考)。
+=================================================================== */
+(function(){
+try{
+  if (history.scrollRestoration) history.scrollRestoration = 'manual';
+
+  var current = window.scrollY;
+  var target = window.scrollY;
+  var EASE = 0.065; // 小さいほど遅延が強い
+
+  function maxScroll(){
+    return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  }
+
+  window.addEventListener('wheel', function(e){
+    e.preventDefault();
+    target = Math.max(0, Math.min(maxScroll(), target + e.deltaY));
+  }, { passive:false });
+
+  var touchStartY = null;
+  window.addEventListener('touchstart', function(e){
+    touchStartY = e.touches[0].clientY;
+  }, { passive:true });
+  window.addEventListener('touchmove', function(e){
+    if (touchStartY === null) return;
+    var y = e.touches[0].clientY;
+    var dy = touchStartY - y;
+    touchStartY = y;
+    target = Math.max(0, Math.min(maxScroll(), target + dy * 1.6));
+  }, { passive:true });
+
+  function raf(){
+    current += (target - current) * EASE;
+    if (Math.abs(target - current) < 0.05) current = target;
+    window.scrollTo(0, current);
+    if (window.ScrollTrigger) ScrollTrigger.update();
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  window.addEventListener('resize', function(){
+    target = Math.max(0, Math.min(maxScroll(), target));
+  });
+}catch(err){ console.error('[smooth-scroll] init failed:', err); }
+})();
+</script>
+
+</body>
+</html>
