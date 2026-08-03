@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERMS OF SERVICE 利用規約 | WEOON</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;900&family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'qao5euk',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --page-pad-x: 100px;
+  --page-pad-top: 160px;
+  --page-pad-bottom: 150px;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+html{ width:100%; min-height:100vh; background:linear-gradient(150deg,#f4f6f8 0%,#e9edf1 55%,#dfe4e9 100%); }
+body{ width:100%; min-height:100vh; background:transparent; overscroll-behavior:none; }
+body{ font-family:"Noto Sans JP", sans-serif; color:#15171a; }
+a{ color:inherit; }
+::selection{ background:#0d0e10; color:#fff; }
+
+/* background decoration — same as contact.html */
+.bg-deco{ position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.bg-deco .deco-glow{
+  content:""; position:absolute; left:-8%; top:-14%; width:34%; aspect-ratio:1/1; border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, rgba(255,255,255,.18), rgba(255,255,255,0) 62%);
+}
+.bg-deco .deco-l1{
+  position:absolute; left:0; top:0; width:220%; height:2px; background:rgba(30,35,42,.14);
+  transform-origin:0 0; transform:rotate(24deg) translate(0, 190px);
+}
+.bg-deco .deco-l2{
+  position:absolute; right:6%; bottom:8%; width:46%; height:1px; background:rgba(30,35,42,.14);
+  transform-origin:100% 100%; transform:rotate(-42deg);
+}
+
+main{ padding:var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom); display:block; position:relative; z-index:1; }
+
+.tos-panel{ position:relative; width:100%; margin-left:-158px; }
+
+.tos-header{
+  position:relative; display:flex; align-items:baseline; gap:40px;
+  margin-bottom:0;
+}
+.tos-header .en{
+  font-family:"ITC Avant Garde Gothic Pro","Century Gothic","Futura",sans-serif;
+  font-weight:700; font-size:60px; letter-spacing:.05em; color:#0d0e10;
+}
+.tos-header .jp{ font-family:"Noto Sans JP",sans-serif; font-weight:400; font-size:30px; letter-spacing:.05em; color:#1a1c1e; }
+
+.tos-effective{
+  font-weight:300; font-size:18px; line-height:28px; letter-spacing:.03em; color:#6c7178; margin:20px 0 100px;
+}
+
+.tos-body{ display:grid; grid-template-columns:300px 1fr; gap:100px; }
+.tos-main{ grid-column:2; }
+
+.tos-toc{ position:fixed; top:30px; left:-58px; width:300px; z-index:10; }
+.tos-toc a{
+  display:block; text-align:right; font-weight:500; font-size:12px; line-height:28px; letter-spacing:.025em;
+  color:#0d0e10; text-decoration:none; border-bottom:1px solid transparent;
+}
+.num2{ display:inline-block; margin:0 .12em; }
+.tos-toc a:hover{ opacity:.5; }
+
+.tos-articles article{ margin-bottom:70px; }
+.tos-articles h2{
+  font-weight:500; font-size:30px; line-height:55px; letter-spacing:.02em; color:#0d0e10; margin-bottom:20px;
+}
+.tos-articles p{
+  font-weight:300; font-size:18px; line-height:28px; letter-spacing:.02em; color:#33383e; margin-bottom:6px;
+}
+.tos-articles p:last-child{ margin-bottom:0; }
+
+.tos-back-row{ display:flex; justify-content:center; margin-top:100px; }
+.back-btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid #1a1c1e; cursor:pointer;
+  background:linear-gradient(150deg,#f4f6f8 0%,#e9edf1 55%,#dfe4e9 100%); background-attachment:fixed;
+  border-radius:2px; width:200px; height:40px; padding:0; box-sizing:border-box; text-decoration:none;
+  font-family:"Noto Sans JP",sans-serif; font-weight:600; font-size:15px; line-height:18px; letter-spacing:.5em; color:#15171a;
+  transition:filter .2s ease, transform .2s ease;
+}
+.back-btn:hover{ filter:brightness(0.97); transform:translateY(-1px); }
+.back-btn svg{ width:24px; height:auto; }
+
+@media (max-width:900px){
+  main{ padding:70px 6% 90px; }
+  .tos-body{ grid-template-columns:1fr; gap:8px; }
+  .tos-toc{ display:none; }
+  .tos-panel{ margin-left:0; }
+  .tos-main{ grid-column:1; }
+}
+@media (max-width:520px){
+  main{ padding:60px 5% 80px; }
+  .tos-header{ flex-direction:column; gap:6px; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-deco">
+  <div class="deco-glow"></div>
+  <div class="deco-l1"></div>
+  <div class="deco-l2"></div>
+</div>
+
+<main>
+  <div class="tos-panel">
+    <div class="tos-body">
+      <nav class="tos-toc">
+        <a href="#art1">第１条（契約の目的）</a>
+        <a href="#art2">第２条（個別条件）</a>
+        <a href="#art3">第３条（情報提供）</a>
+        <a href="#art4">第４条（初期経営構造解析）</a>
+        <a href="#art5">第５条（秘密保持）</a>
+        <a href="#art6">第６条（成果物および知的財産権）</a>
+        <a href="#art7">第７条（損害賠償）</a>
+        <a href="#art8">第８条（契約解除）</a>
+        <a href="#art9">第９条（契約の優先関係）</a>
+        <a href="#art10">第<span class="num2">10</span>条（協議事項）</a>
+        <a href="#art11">第<span class="num2">11</span>条（準拠法および管轄）</a>
+        <a href="#art12">第<span class="num2">12</span>条（電子契約）</a>
+      </nav>
+
+      <div class="tos-main">
+        <div class="tos-header">
+          <span class="en">TERMS OF SERVICE</span>
+          <span class="jp">利用規約</span>
+        </div>
+        <div class="tos-effective">Effective Date&emsp;2026.00.00</div>
+
+        <div class="tos-articles">
+        <article id="art1">
+          <h2>第１条（契約の目的）</h2>
+          <p>本契約は、WEOON（以下「当社」という。）が提供するサービスに関し、当社と契約者との基本的な取引条件を定めることを目的とします。</p>
+        </article>
+
+        <article id="art2">
+          <h2>第２条（個別条件）</h2>
+          <p>サービス内容、料金、契約期間、対象施策、運用設計期間その他個別条件については、別途締結するサービス契約書に定めるものとします。</p>
+        </article>
+
+        <article id="art3">
+          <h2>第３条（情報提供）</h2>
+          <p>契約者は、当社によるサービス提供に必要な事業情報、売上情報、財務情報その他当社が必要と判断する情報を提供するものとします。<br>契約者が必要な情報を提供しない場合、当社はサービスの全部または一部を提供できないことがあります。<br>また、これにより生じた損害について、当社は責任を負わないものとします。</p>
+        </article>
+
+        <article id="art4">
+          <h2>第４条（初期経営構造解析）</h2>
+          <p>当社は、サービス提供にあたり、初期経営構造解析を実施します。<br>契約者は、当社が指定する情報および資料を提供するものとします。<br>初期経営構造解析費については、サービス契約書に定めるものとします。</p>
+        </article>
+
+        <article id="art5">
+          <h2>第５条（秘密保持）</h2>
+          <p>契約者および当社は、本契約またはサービス提供に関連して知り得た相手方の技術上、営業上その他一切の非公開情報を、相手方の事前承諾なく第三者へ開示または漏えいしてはならないものとします。<br>また、取得した情報については、アクセス権管理、保管管理、暗号化その他適切な安全管理措置を講じるものとします。<br>当社は、不正アクセスその他セキュリティリスクの防止に向けた管理体制を維持するものとします。<br>情報漏えいその他重大なセキュリティ事故が発生した場合は、速やかに事実確認および影響範囲の調査を行い、必要に応じて契約者へ通知するものとします。<br>本条の義務は、本契約終了後も存続するものとします。</p>
+        </article>
+
+        <article id="art6">
+          <h2>第６条（成果物および知的財産権）</h2>
+          <p>本サービスに関連して当社が制作または提供する成果物の利用条件については、サービス契約書に定めるものとします。<br>成果物の権利譲渡または買取を行う場合は、別途当社が定める条件によるものとします。<br>当社が保有する分析モデル、設計フレームワーク、運用システムその他知的財産は、当社または正当な権利者に帰属します。<br>契約者は、当社の事前承諾なく、これらを複製、改変、転載、販売または第三者へ提供してはならないものとします。</p>
+        </article>
+
+        <article id="art7">
+          <h2>第７条（損害賠償）</h2>
+          <p>契約者が本契約またはサービス契約書に違反し、当社に損害を与えた場合、契約者はその損害を賠償するものとします。<br>当社が負う損害賠償責任の上限は、月額プランについては契約者が当社へ支払った直近12ヶ月間の利用料金総額とし、拡張施策については、当該損害の原因となった拡張施策に対して契約者が当社へ支払った費用とします。<br>当社は、逸失利益、間接損害、特別損害その他これに類する損害について責任を負わないものとします。</p>
+        </article>
+
+        <article id="art8">
+          <h2>第８条（契約解除）</h2>
+          <p>契約者または当社は、相手方が本契約またはサービス契約書に違反し、相当期間を定めて是正を求めたにもかかわらず改善されない場合、本契約または当該サービス契約を解除できるものとします。</p>
+        </article>
+
+        <article id="art9">
+          <h2>第９条（契約の優先関係）</h2>
+          <p>本契約、利用規約およびサービス契約書の内容が異なる場合、サービス契約書、本契約、利用規約の順に優先して適用されるものとします。</p>
+        </article>
+
+        <article id="art10">
+          <h2>第<span class="num2">10</span>条（協議事項）</h2>
+          <p>本契約に定めのない事項または本契約の解釈に疑義が生じた場合、契約者および当社は誠意をもって協議し解決するものとします。</p>
+        </article>
+
+        <article id="art11">
+          <h2>第<span class="num2">11</span>条（準拠法および管轄）</h2>
+          <p>本契約は、日本法に準拠します。<br>本契約に関して紛争が生じた場合、当社所在地を管轄する裁判所を第一審の専属的合意管轄裁判所とします。</p>
+        </article>
+
+        <article id="art12">
+          <h2>第<span class="num2">12</span>条（電子契約）</h2>
+          <p>本契約は、電子署名その他電子的方法により締結できるものとし、電子的に締結された契約は書面による契約と同一の効力を有するものとします。</p>
+        </article>
+        </div>
+
+        <div class="tos-back-row">
+          <a href="javascript:history.back()" class="back-btn">
+            <svg viewBox="0 0 15.94 4.81"><polyline points="15.67 4.54 .62 4.54 4.63 .27" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width=".54"/></svg>
+            <span>戻る</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  if (typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var headTl = gsap.timeline({ defaults:{ ease:'power2.out', duration:.7 } });
+  headTl
+    .from('.tos-header .en', { opacity:0, y:26 })
+    .from('.tos-header .jp', { opacity:0, y:26 }, '-=0.45')
+    .from('.tos-effective', { opacity:0, y:16 }, '-=0.3');
+
+  gsap.from('.tos-toc a', {
+    opacity:0, x:-14, duration:.5, ease:'power2.out', stagger:0.05,
+    scrollTrigger:{ trigger:'.tos-toc', start:'top 90%' }
+  });
+
+  gsap.utils.toArray('.tos-articles article').forEach(function(el){
+    gsap.from(el, {
+      opacity:0, y:20, duration:.6, ease:'power2.out',
+      scrollTrigger:{ trigger:el, start:'top 90%' }
+    });
+  });
+
+  gsap.from('.tos-back-row', {
+    opacity:0, y:16, duration:.6, ease:'power2.out',
+    scrollTrigger:{ trigger:'.tos-back-row', start:'top 95%' }
+  });
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.to('.deco-glow', { x:40, y:30, scale:1.08, duration:22, ease:'sine.inOut', repeat:-1, yoyo:true });
+    gsap.to('.deco-l1', { rotate:27, x:'+=2%', duration:26, ease:'sine.inOut', repeat:-1, yoyo:true });
+    gsap.to('.deco-l2', { rotate:-38, duration:30, ease:'sine.inOut', repeat:-1, yoyo:true });
+  }
+})();
+</script>
+</body>
+</html>
